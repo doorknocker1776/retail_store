@@ -24,8 +24,8 @@ class GroceryItemTile extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: color[100],
+          borderRadius: BorderRadius.circular(20),
+          color: color[300],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,7 +36,7 @@ class GroceryItemTile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Image.asset(
                 imagePath,
-                height: 64,
+                height: 80,
               ),
             ),
 
@@ -44,7 +44,7 @@ class GroceryItemTile extends StatelessWidget {
             Text(
               itemName,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
               ),
             ),
 
@@ -54,7 +54,7 @@ class GroceryItemTile extends StatelessWidget {
               child: Text(
                 '\$' + itemPrice,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+int wc=0;
+int ac=0;
+int bc=0;
+int cc=0;
 
 class CartModel extends ChangeNotifier {
   // list of items on sale

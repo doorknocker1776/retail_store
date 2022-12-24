@@ -25,7 +25,7 @@ class IntroScreen extends StatelessWidget {
 
             // we deliver groceries at your doorstep
             Padding(
-              padding: const EdgeInsets.all(28.0),
+              padding: const EdgeInsets.all(10.0),
               child: Text(
                 'We deliver groceries at your doorstep',
                 textAlign: TextAlign.center,
@@ -45,9 +45,6 @@ class IntroScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 24),
-
-            const Spacer(),
-
             // get started button
             GestureDetector(
               onTap: () => Navigator.pushReplacement(

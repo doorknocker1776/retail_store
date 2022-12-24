@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import '../components/grocery_item_tile.dart';
 import '../model/cart_model.dart';
 import 'cart_page.dart';
-
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,41 +14,65 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.deepPurple[200],
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 24.0),
-          child: Icon(
+          padding: const EdgeInsets.only(left: 45.0),
+          child:
+          Icon(
             Icons.location_on,
-            color: Colors.grey[700],
+            color: Colors.black,
           ),
         ),
-        title: Text(
-          'Sydney, Australia',
+        title:
+        Text(
+          'Islamabad, Pakistan',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.grey[700],
+            color: Colors.black,
           ),
         ),
-        centerTitle: false,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 24.0),
+            padding: const EdgeInsets.only(right: 10.0),
             child: Container(
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(12),
+                color: Colors.grey[10],
+                borderRadius: BorderRadius.circular(50),
               ),
               child: Icon(
                 Icons.person,
-                color: Colors.grey,
+                color: Colors.black,
               ),
             ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 50,
+        backgroundColor: Colors.deepPurple,
+        color: Colors.deepPurple.shade200,
+        animationDuration: Duration(milliseconds: 450),
+        onTap:(index){
+          //return CartPage();
+        },
+        items: [
+          Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.shopping_cart,
+            color: Colors.white,
           ),
         ],
       ),
@@ -63,48 +88,22 @@ class _HomePageState extends State<HomePage> {
         ),
         child: const Icon(Icons.shopping_bag),
       ),
-      body: Column(
+
+      body:
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 48),
-
-          // good morning bro
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: Text('Good morning,'),
-          ),
-
-          const SizedBox(height: 4),
-
-          // Let's order fresh items for you
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Text(
-              "Let's order fresh items for you",
-              style: GoogleFonts.notoSerif(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 24),
-
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: Divider(),
-          ),
-
           const SizedBox(height: 24),
 
           // categories -> horizontal listview
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 110.0),
             child: Text(
-              "Fresh Items",
+              "Groceries:",
               style: GoogleFonts.notoSerif(
                 //fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -114,8 +113,8 @@ class _HomePageState extends State<HomePage> {
             child: Consumer<CartModel>(
               builder: (context, value, child) {
                 return GridView.builder(
-                  padding: const EdgeInsets.all(12),
-                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(20),
+                  //physics: const NeverScrollableScrollPhysics(),
                   itemCount: value.shopItems.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
