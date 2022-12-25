@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import '../components/grocery_item_tile.dart';
 import '../model/cart_model.dart';
-
+import 'cart_page.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'intro_screen.dart';
+import "home_page.dart";
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
@@ -11,11 +14,59 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        title:
+        Text(
+            "Cart",
+          style: GoogleFonts.notoSerif(
+            fontSize: 30,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple.shade200,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Colors.grey[800],
         ),
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 50,
+        backgroundColor: Colors.white,
+        color: Colors.deepPurple.shade200,
+        animationDuration: Duration(milliseconds: 450),
+
+        onTap: (index) => Future.delayed(Duration(milliseconds: 550),() {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                if (index == 0) {
+                  return HomePage();
+                }
+                else if (index == 1) {
+                  return IntroScreen();
+                }
+                return CartPage();
+              },
+            ),
+          );
+        }
+        ),
+        items: [
+          Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.shopping_cart,
+            color: Colors.white,
+          ),
+        ],
       ),
       body: Consumer<CartModel>(
         builder: (context, value, child) {
@@ -25,15 +76,7 @@ class CartPage extends StatelessWidget {
               // Let's order fresh items for you
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0),
-                child: Text(
-                  "My Cart",
-                  style: GoogleFonts.notoSerif(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ),
-
               // list view of cart
               Expanded(
                 child: Padding(
@@ -99,7 +142,7 @@ class CartPage extends StatelessWidget {
                           const SizedBox(height: 8),
                           // total price
                           Text(
-                            '\$${value.calculateTotal()}',
+                            '\PKR ${value.calculateTotal()}',
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import '../components/grocery_item_tile.dart';
 import '../model/cart_model.dart';
 import 'cart_page.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
+import "account_page.dart";
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,12 +17,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple[200],
-        elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 45.0),
+          padding: const EdgeInsets.only(left: 10.0),
           child:
           Icon(
             Icons.location_on,
@@ -37,26 +36,28 @@ class _HomePageState extends State<HomePage> {
             color: Colors.black,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[10],
-                borderRadius: BorderRadius.circular(50),
+        actions:
+        [
+             GestureDetector(
+                onTap: () =>
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return account();
+                        },
+                  ),
+                  ),
+                child:
+                Icon(
+                  Icons.person,
+                  size: 26.0,
+                  color: Colors.black,
+                ),
               ),
-              child: Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-            ),
+    ],
           ),
-        ],
-      ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.white,
         color: Colors.deepPurple.shade200,
         animationDuration: Duration(milliseconds: 450),
 
@@ -92,19 +93,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return CartPage();
-            },
-          ),
-        ),
-        child: const Icon(Icons.shopping_bag),
-      ),
-
       body:
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
