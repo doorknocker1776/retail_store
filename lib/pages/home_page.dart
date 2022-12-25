@@ -6,6 +6,7 @@ import '../model/cart_model.dart';
 import 'cart_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'intro_screen.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -58,9 +59,24 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.deepPurple,
         color: Colors.deepPurple.shade200,
         animationDuration: Duration(milliseconds: 450),
-        onTap:(index){
-          //return CartPage();
-        },
+
+        onTap: (index) => Future.delayed(Duration(milliseconds: 550),() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    if (index == 0) {
+                      return HomePage();
+                    }
+                    else if (index == 1) {
+                      return IntroScreen();
+                    }
+                    return CartPage();
+                  },
+                ),
+              );
+        }
+        ),
         items: [
           Icon(
             Icons.home,
