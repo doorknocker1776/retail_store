@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +9,7 @@ import 'cart_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "account_page.dart";
+import "search.dart";
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -19,12 +22,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple[200],
+        //backgroundColor: Colors.lightBlueAccent,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
+          padding: const EdgeInsets.only(left: 0.0),
           child:
           Icon(
             Icons.location_on,
+            size: 30,
             color: Colors.black,
           ),
         ),
@@ -32,25 +36,29 @@ class _HomePageState extends State<HomePage> {
         Text(
           'Islamabad, Pakistan',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 20,
             color: Colors.black,
           ),
         ),
+        titleSpacing:-12,
         actions:
         [
              GestureDetector(
                 onTap: () =>
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
-                        return account();
+                        return AccountPage();
                         },
                   ),
                   ),
                 child:
-                Icon(
-                  Icons.person,
-                  size: 26.0,
-                  color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: Icon(
+                    Icons.person,
+                    size: 32.0,
+                    color: Colors.black,
+                  ),
                 ),
               ),
     ],
@@ -58,7 +66,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
         backgroundColor: Colors.white,
-        color: Colors.deepPurple.shade200,
+        color: Colors.blue,
         animationDuration: Duration(milliseconds: 450),
 
         onTap: (index) => Future.delayed(Duration(milliseconds: 550),() {
