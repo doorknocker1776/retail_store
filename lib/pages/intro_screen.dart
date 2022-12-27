@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:groceryapp/pages/login_page.dart';
 import 'home_page.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -51,7 +52,7 @@ class IntroScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return HomePage();
+                    return LoginPage();
                   },
                 ),
               ),

@@ -1,4 +1,4 @@
-import 'dart:ffi';
+//'import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +9,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "account_page.dart";
 import "search.dart";
-import 'package:groceryapp/model/cart_model.dart';
-import "../model/cart_model.dart";
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
