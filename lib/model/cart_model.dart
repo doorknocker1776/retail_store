@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:groceryapp/model/home_model.dart';
+import 'package:groceryapp/model/cart_model.dart';
 int wc=0;
 int ac=0;
 int bc=0;
@@ -8,10 +10,10 @@ class CartModel extends ChangeNotifier {
   // list of items on sale
   List _shopItems = const [
     // [ itemName, itemPrice, imagePath, color ]
-    ["Electronics", "Browse Now", "lib/images/electronics.png", Colors.grey],
-    ["Fashion", "Browse Now", "lib/images/fashion.png", Colors.grey],
-    ["Groceries", "Browse Now", "lib/images/groceries.png", Colors.grey],
-    ["New Arrivals", "Browse Now", "lib/images/newarrivals.png", Colors.grey],
+    ["auugh", "2.0", "lib/images/electronics.png", Colors.green],
+    ["auugh 1", "1.0", "lib/images/banana.png", Colors.yellow],
+    ["auugh 2", "1.1", "lib/images/chicken.png", Colors.brown],
+    ["auugh 3", "1.20", "lib/images/water.png", Colors.blue],
   ];
 
   // list of cart items

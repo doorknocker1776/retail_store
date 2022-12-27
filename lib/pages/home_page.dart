@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../components/grocery_item_tile.dart';
-import '../model/cart_model.dart';
+import '../model/home_model.dart';
 import 'cart_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "account_page.dart";
 import "search.dart";
-import "../model/home_model.dart";
+import 'package:groceryapp/model/cart_model.dart';
+import "../model/cart_model.dart";
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -122,7 +123,7 @@ class _HomePageState extends State<HomePage> {
 
           // recent orders -> show last 3
           Expanded(
-            child: Consumer<CartModel>(
+            child: Consumer<HomeModel>(
               builder: (context, value, child) {
                 return GridView.builder(
                   padding: const EdgeInsets.all(20),
@@ -138,9 +139,9 @@ class _HomePageState extends State<HomePage> {
                       itemPrice: value.shopItems[index][1],
                       imagePath: value.shopItems[index][2],
                       color: value.shopItems[index][3],
-                      onPressed: () =>
-                          Provider.of<CartModel>(context, listen: false)
-                              .addItemToCart(index),
+                      onPressed: () {},
+                          // Provider.of<HomeModel>(context, listen: false)
+                          //     .addItemToCart(index),
                     );
                   },
                 );
