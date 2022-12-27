@@ -24,7 +24,7 @@ class CartPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.deepPurple.shade200,
+        backgroundColor: Colors.blue,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Colors.grey[800],
@@ -33,7 +33,7 @@ class CartPage extends StatelessWidget {
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
         backgroundColor: Colors.white,
-        color: Colors.deepPurple.shade200,
+        color: Colors.blue,
         animationDuration: Duration(milliseconds: 450),
 
         onTap: (index) => Future.delayed(Duration(milliseconds: 550),() {
