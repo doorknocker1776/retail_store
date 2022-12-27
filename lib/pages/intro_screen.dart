@@ -8,7 +8,7 @@ class IntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color.fromRGBO(75, 144, 240, 1),
       body: SafeArea(
         child: Column(
           children: [
@@ -36,7 +36,7 @@ class IntroScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom:120),
               child:
               Text(
-                'Quality Guarranteed',
+                'Quality Guaranteed',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,

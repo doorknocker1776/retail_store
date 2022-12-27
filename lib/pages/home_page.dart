@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +9,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "account_page.dart";
 import "search.dart";
+import "../model/home_model.dart";
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -109,9 +109,9 @@ class _HomePageState extends State<HomePage> {
 
           // categories -> horizontal listview
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 110.0),
+            padding: const EdgeInsets.only(left:110),
             child: Text(
-              "Groceries:",
+              "Categories:",
               style: GoogleFonts.notoSerif(
                 //fontWeight: FontWeight.bold,
                 fontSize: 36,

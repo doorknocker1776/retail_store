@@ -33,10 +33,10 @@ class GroceryItemTile extends StatelessWidget {
           children: [
             // item image
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              padding: const EdgeInsets.only(top:0),
               child: Image.asset(
                 imagePath,
-                height: 80,
+                height: 100,
               ),
             ),
 
@@ -52,7 +52,7 @@ class GroceryItemTile extends StatelessWidget {
               onPressed: onPressed,
               color: color,
               child: Text(
-                '\PKR ' + itemPrice,
+                '\ ' + itemPrice,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
