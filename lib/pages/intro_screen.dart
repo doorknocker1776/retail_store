@@ -8,7 +8,7 @@ class IntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Colors.blue,
       body: SafeArea(
         child: Column(
           children: [
@@ -20,30 +20,30 @@ class IntroScreen extends StatelessWidget {
                 top: 120,
                 bottom: 20,
               ),
-              child: Image.asset('lib/images/avocado.png'),
+              child: Image.asset('lib/images/emart-logo.png'),
             ),
 
-            // we deliver groceries at your doorstep
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(left:0,top:0,right:0,bottom:20),
               child: Text(
-                'We deliver groceries at your doorstep',
+                'Welcome to Emart!',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.notoSerif(
                     fontSize: 36, fontWeight: FontWeight.bold),
               ),
             ),
-
-            // groceree gives you fresh vegetables and fruits
-            Text(
-              'Fresh items everyday',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[700],
+            Padding(
+              padding: EdgeInsets.only(bottom:120),
+              child:
+              Text(
+                'Quality Guarranteed',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
               ),
             ),
-
             const SizedBox(height: 24),
             // get started button
             GestureDetector(
@@ -59,7 +59,7 @@ class IntroScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: const Color.fromARGB(255, 112, 91, 222),
+                  color: Colors.black,
                 ),
                 child: const Text(
                   "Get Started",

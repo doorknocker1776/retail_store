@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                       return HomePage();
                     }
                     else if (index == 1) {
-                      return IntroScreen();
+                      return SearchPage();
                     }
                     return CartPage();
                   },

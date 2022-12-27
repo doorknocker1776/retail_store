@@ -70,7 +70,7 @@ class AccountPage extends StatelessWidget {
             // Recent purchases
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: 5,
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text("Order # $index"),
