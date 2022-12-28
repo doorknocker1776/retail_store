@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:groceryapp/components/my_button.dart';
 import 'package:groceryapp/components/my_textfield.dart';
 import 'package:groceryapp/components/square_tile.dart';
 import 'package:groceryapp/pages/intro_screen.dart';
 import 'package:groceryapp/pages/signup.dart';
+import 'package:lottie/lottie.dart';
 import "home_page.dart";
 import "signup.dart";
-class LoginPage extends StatelessWidget {
+import "package:animated_background/animated_background.dart";
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   // sign user in method
@@ -17,8 +27,17 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
+      backgroundColor: Colors.orangeAccent,
+      body:
+      AnimatedBackground(
+        vsync: this,
+        behaviour: BubblesBehaviour(
+        options: BubbleOptions(
+          bubbleCount: 5,
+          growthRate: 25,
+          popRate: 150
+        )
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -35,10 +54,11 @@ class LoginPage extends StatelessWidget {
 
               // welcome back, you've been missed!
               Text(
-                'Welcome back you\'ve been missed!',
-                style: TextStyle(
-                  color: Colors.grey[700],
+                'Welcome back, you\'ve been missed!',
+                style: GoogleFonts.openSans(
+                  color: Colors.black,
                   fontSize: 16,
+                  fontWeight: FontWeight.bold
                 ),
               ),
 
@@ -80,7 +100,8 @@ class LoginPage extends StatelessWidget {
               ),
                       child: Text(
                         'Continue as guest',
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: GoogleFonts.openSans
+                          (color: Colors.black),
                       ),
                     )
                   ],
@@ -103,14 +124,14 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
+                        thickness: 2,
+                        color: Colors.black,
                       ),
                     ),
                     Expanded(
                       child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
+                        thickness: 2,
+                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -124,7 +145,9 @@ class LoginPage extends StatelessWidget {
                 children: [
                   Text(
                     'Not a member?',
-                    style: TextStyle(color: Colors.grey[700]),
+                    style: TextStyle(color: Colors.grey[700],
+                      fontSize: 15
+                    ),
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
@@ -138,7 +161,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     child: Text(
                       'Register now',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.blue[800]),
                     ),
                   )
 
@@ -147,7 +170,7 @@ class LoginPage extends StatelessWidget {
           ],
         ),
       ),
-      )
+      ),
     );
   }
 }

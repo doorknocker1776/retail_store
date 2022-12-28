@@ -2,34 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:groceryapp/pages/login_page.dart';
 import 'home_page.dart';
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:animated_background/animated_background.dart';
 
-class IntroScreen extends StatelessWidget {
+class IntroScreen extends StatefulWidget  {
   const IntroScreen({super.key});
 
   @override
+  State<IntroScreen> createState() => _IntroScreenState();
+}
+
+class _IntroScreenState extends State<IntroScreen> with TickerProviderStateMixin{
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(75, 144, 240, 1),
-      body: SafeArea(
-        child: Column(
+      backgroundColor: Colors.orange,
+      body: AnimatedBackground(
+        vsync: this,
+        behaviour: (
+          RacingLinesBehaviour(
+          numLines: 50,
+          )
+          ),
+        child:
+        Column(
           children: [
             // big logo
             Padding(
               padding: const EdgeInsets.only(
-                left: 100.0,
-                right: 100.0,
-                top: 120,
-                bottom: 20,
+                left: 10.0,
+                right: 0.0,
+                top: 30,
+                bottom: 40,
               ),
-              child: Image.asset('lib/images/emart-logo.png'),
+              child:
+              Lottie.network("https://assets7.lottiefiles.com/packages/lf20_57TxAX.json"),
             ),
 
             Padding(
               padding: const EdgeInsets.only(left:0,top:0,right:0,bottom:20),
               child: Text(
-                'Welcome to Emart!',
+                'Welcome to E-Mart!',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.notoSerif(
+                style: GoogleFonts.openSans(
                     fontSize: 36, fontWeight: FontWeight.bold),
               ),
             ),
@@ -37,15 +53,16 @@ class IntroScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom:120),
               child:
               Text(
-                'Quality Guaranteed',
+                'High Quality, At a Low Price',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: GoogleFonts.openSans(
                   fontSize: 20,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 1),
             // get started button
             GestureDetector(
               onTap: () => Navigator.pushReplacement(
@@ -57,16 +74,16 @@ class IntroScreen extends StatelessWidget {
                 ),
               ),
               child: Container(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 70),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 child: const Text(
                   "Get Started",
                   style: TextStyle(
-                    color: Colors.white,
-                    // fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),

@@ -3,7 +3,9 @@ import 'package:groceryapp/components/signup.dart';
 import 'package:groceryapp/components/my_textfield.dart';
 import 'package:groceryapp/components/square_tile.dart';
 import 'package:groceryapp/pages/login_page.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import "package:animated_background/animated_background.dart";
+import 'package:lottie/lottie.dart';
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
   const RegisterPage({super.key, required this.onTap});
@@ -12,11 +14,13 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin{
   // text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final bankaccountcontroller = TextEditingController();
+
   // error message to user
   void showErrorMessage(String message) {
     showDialog(
@@ -38,23 +42,18 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.orangeAccent,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 25),
-
-                // logo
-                const Icon(
-                  Icons.lock,
-                  size: 50,
+              Padding(padding: EdgeInsets.fromLTRB(110, 0, 110, 0),
+              child:
+              Lottie.network("https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
                 ),
-
-                const SizedBox(height: 25),
-
+                // logo
                 // let's create an account for you
                 Text(
                   'Let\'s create an account for you!',
@@ -64,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 10),
 
                 // email textfield
                 MyTextField(
@@ -84,6 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 const SizedBox(height: 10),
 
+
                 // confirm password textfield
                 MyTextField(
                   controller: confirmPasswordController,
@@ -91,15 +91,21 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                 ),
 
+                const SizedBox(height: 10),
+
+                MyTextField(
+                  controller: bankaccountcontroller,
+                  hintText: 'Bank Account Number',
+                  obscureText: false,
+                ),
+
                 const SizedBox(height: 25),
 
                 // sign in button
                 MyButton(
                   text: "Sign Up",
-                  onTap: null,
+                  onTap: (){},
                 ),
-
-                const SizedBox(height: 50),
 
                 // or continue with
                 Padding(
@@ -121,10 +127,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 50),
-
-                const SizedBox(height: 50),
 
                 // not a member? register now
                 Row(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../components/grocery_item_tile.dart';
-import 'package:groceryapp/model/home_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
