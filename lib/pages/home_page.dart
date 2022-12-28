@@ -9,6 +9,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "account_page.dart";
 import "search.dart";
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -21,70 +22,64 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        //backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Color.fromARGB(255, 255, 158, 22),
         leading: Padding(
           padding: const EdgeInsets.only(left: 0.0),
-          child:
-          Icon(
+          child: Icon(
             Icons.location_on,
             size: 30,
             color: Colors.black,
           ),
         ),
-        title:
-        Text(
+        title: Text(
           'Islamabad, Pakistan',
           style: TextStyle(
             fontSize: 20,
             color: Colors.black,
           ),
         ),
-        titleSpacing:-12,
-        actions:
-        [
-             GestureDetector(
-                onTap: () =>
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return AccountPage();
-                        },
-                  ),
-                  ),
-                child:
-                Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: Icon(
-                    Icons.person,
-                    size: 32.0,
-                    color: Colors.black,
-                  ),
-                ),
+        titleSpacing: -12,
+        actions: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return AccountPage();
+                },
               ),
-    ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: Icon(
+                Icons.person,
+                size: 32.0,
+                color: Colors.black,
+              ),
+            ),
           ),
+        ],
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
         backgroundColor: Colors.white,
-        color: Colors.blue,
+        color: Color.fromARGB(255, 255, 158, 22),
         animationDuration: Duration(milliseconds: 450),
-
-        onTap: (index) => Future.delayed(Duration(milliseconds: 550),() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    if (index == 0) {
-                      return HomePage();
-                    }
-                    else if (index == 1) {
-                      return SearchPage();
-                    }
-                    return CartPage();
-                  },
-                ),
-              );
-        }
-        ),
+        onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                if (index == 0) {
+                  return HomePage();
+                } else if (index == 1) {
+                  return SearchPage();
+                }
+                return CartPage();
+              },
+            ),
+          );
+        }),
         items: [
           Icon(
             Icons.home,
@@ -100,15 +95,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body:
-      Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 24),
 
           // categories -> horizontal listview
           Padding(
-            padding: const EdgeInsets.only(left:110),
+            padding: const EdgeInsets.only(left: 110),
             child: Text(
               "Categories:",
               style: GoogleFonts.notoSerif(
@@ -138,8 +132,8 @@ class _HomePageState extends State<HomePage> {
                       imagePath: value.shopItems[index][2],
                       color: value.shopItems[index][3],
                       onPressed: () {},
-                          // Provider.of<HomeModel>(context, listen: false)
-                          //     .addItemToCart(index),
+                      // Provider.of<HomeModel>(context, listen: false)
+                      //     .addItemToCart(index),
                     );
                   },
                 );
