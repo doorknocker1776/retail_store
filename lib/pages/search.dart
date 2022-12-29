@@ -7,7 +7,7 @@ import 'package:groceryapp/model/cart_model.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "home_page.dart";
-import"cart_page.dart";
+import "cart_page.dart";
 import 'package:groceryapp/model/cart_model.dart';
 
 class SearchPage extends StatefulWidget {
@@ -19,19 +19,33 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final GlobalKey<CurvedNavigationBarState> _navigationBarKey =
-  GlobalKey<CurvedNavigationBarState>();
+      GlobalKey<CurvedNavigationBarState>();
+  int index = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("search"),
+        title: Text(
+          "Search",
+          style: GoogleFonts.openSans(
+            fontSize: 30,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.orange,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Colors.grey[800],
+        ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        key: _navigationBarKey,
         height: 50,
+        index: index,
         backgroundColor: Colors.white,
-        color: Colors.blue,
+        color: Colors.orange,
         animationDuration: Duration(milliseconds: 450),
         onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
           Navigator.push(
@@ -41,11 +55,9 @@ class _SearchPageState extends State<SearchPage> {
                 if (index == 0) {
                   return HomePage();
                 } else if (index == 1) {
-                  return SearchPage();
-                } else if (index == 2) {
-                  return CartPage();
+                  return IntroScreen();
                 }
-                return IntroScreen();
+                return CartPage();
               },
             ),
           );
@@ -67,4 +79,4 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-}//onpressed:
+} //onpressed:

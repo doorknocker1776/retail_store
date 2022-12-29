@@ -9,6 +9,8 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
+        backgroundColor: Colors.orange,
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,6 +20,7 @@ class AccountPage extends StatelessWidget {
             // Profile icon
             CircleAvatar(
               radius: 48,
+              backgroundColor: Colors.orange,
               backgroundImage: NetworkImage(
                 "https://pbs.twimg.com/profile_images/1184635006701963265/g3-LmZv3_400x400.jpg",
               ),
@@ -61,6 +64,9 @@ class AccountPage extends StatelessWidget {
               onPressed: () {
                 // Navigate to the Edit Profile page
               },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+              ),
               child: Text(
                 "Edit Profile",
                 style: TextStyle(

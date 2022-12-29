@@ -5,6 +5,7 @@ import 'package:groceryapp/model/cart_model.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "home_page.dart";
+import 'search.dart';
 List _cartItems = [
   ["IPhone 12 Pro Max", "42.33", "lib/images/iphone.png", Colors.orange],
   ["PS5", "9911199.999", "lib/images/ps5.png", Colors.orange],
@@ -61,7 +62,7 @@ class _CartPage extends State<CartPage> {
                   return HomePage();
                 }
                 else if (index == 1) {
-                  return IntroScreen();
+                  return SearchPage();
                 }
                 return CartPage();
               },
