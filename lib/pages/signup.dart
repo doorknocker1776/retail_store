@@ -19,6 +19,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin{
   // text editing controllers
   final emailController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final bankaccountcontroller = TextEditingController();
@@ -33,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
           title: Center(
             child: Text(
               message,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.red),
             ),
           ),
         );
@@ -57,20 +58,19 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 ),
                 // logo
                 // let's create an account for you
-                Text(
-                  'Let\'s create an account for you!',
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 16,
-                  ),
-                ),
 
-                const SizedBox(height: 10),
 
                 // email textfield
                 MyTextField(
                   controller: emailController,
                   hintText: 'Email',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 10),
+
+                MyTextField(
+                  controller: usernameController,
+                  hintText: 'Username',
                   obscureText: false,
                 ),
 
@@ -101,12 +101,23 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                   obscureText: false,
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 15),
 
                 // sign in button
                 MyButton(
                   text: "Sign Up",
-                  onTap: (){},
+                  onTap: (){
+                    String bnk = bankaccountcontroller.text;
+                    String password =  passwordController.text;
+                    String cpassword = confirmPasswordController.text;
+                    String email = emailController.text;
+                    String username = usernameController.text;
+
+                    if(!RegExp(r'^[^@]+@[^@]+\.[^@]+$').hasMatch(email))
+                    {child: showErrorMessage("Invalid Email");}
+                    else if(true) {}
+                    },
+
                 ),
 
                 // or continue with
