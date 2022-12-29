@@ -8,6 +8,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "home_page.dart";
 import"cart_page.dart";
+import 'package:groceryapp/model/cart_model.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -65,4 +67,4 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-}
+}//onpressed:

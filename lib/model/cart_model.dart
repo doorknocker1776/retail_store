@@ -7,31 +7,28 @@ int bc=0;
 int cc=0;
 
 class CartModel extends ChangeNotifier {
-  // list of items on sale
-  List _shopItems = const [
-    // [ itemName, itemPrice, imagePath, color ]
-    ["auugh", "2.0", "lib/images/electronics.png", Colors.green],
-    ["auugh 1", "1.0", "lib/images/banana.png", Colors.yellow],
-    ["auugh 2", "1.1", "lib/images/chicken.png", Colors.brown],
-    ["auugh 3", "1.20", "lib/images/water.png", Colors.blue],
-  ];
 
   // list of cart items
-  List _cartItems = [];
+  List _cartItems = [
+    ["IPhone 12 Pro Max", "42.33"],
+    ["PS5", "9999.999"],
+    ["Desktop PC", "9913"],
+    ["Washing Machine", "42.33"],
+  ];
 
   get cartItems => _cartItems;
 
-  get shopItems => _shopItems;
 
   // add item to cart
-  void addItemToCart(int index) {
-    _cartItems.add(_shopItems[index]);
+  void addItemToCart(List index) {
+    _cartItems.add(index);
     notifyListeners();
   }
 
   // remove item from cart
-  void removeItemFromCart(int index) {
-    _cartItems.removeAt(index);
+  void removeItemFromCart(List index) {
+
+    _cartItems.removeAt(_cartItems.indexOf(index));
     notifyListeners();
   }
 

@@ -6,6 +6,8 @@ import 'package:groceryapp/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import "package:animated_background/animated_background.dart";
 import 'package:lottie/lottie.dart';
+import 'package:groceryapp/model/cart_model.dart';
+
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
   const RegisterPage({super.key, required this.onTap});

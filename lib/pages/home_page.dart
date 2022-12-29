@@ -9,6 +9,15 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "account_page.dart";
 import "search.dart";
+import 'package:groceryapp/pages/login_page.dart';
+import 'package:groceryapp/pages/login_page.dart';
+import 'package:groceryapp/pages/electronics.dart';
+import 'package:groceryapp/model/cart_model.dart';
+import 'package:groceryapp/pages/fash.dart';
+import 'package:groceryapp/pages/grocer.dart';
+import 'package:groceryapp/pages/newarr.dart';
+
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -131,7 +140,48 @@ class _HomePageState extends State<HomePage> {
                       itemPrice: value.shopItems[index][1],
                       imagePath: value.shopItems[index][2],
                       color: value.shopItems[index][3],
-                      onPressed: () {},
+                      onPressed: () {
+                        if(index == 0){
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ElecPage();
+                              },
+                            ),
+                          );
+                        }
+                        if(index == 1){
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return FashPage();
+                              },
+                            ),
+                          );
+                        }
+                        if(index == 2){
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return GroPage();
+                              },
+                            ),
+                          );
+                        }
+                        if(index == 3){
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return NuPage();
+                              },
+                            ),
+                          );
+                        }
+                      },
                       // Provider.of<HomeModel>(context, listen: false)
                       //     .addItemToCart(index),
                     );

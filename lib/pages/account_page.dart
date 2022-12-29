@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:groceryapp/model/cart_model.dart';
+
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
 

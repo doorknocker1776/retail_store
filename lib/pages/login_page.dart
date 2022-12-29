@@ -9,6 +9,8 @@ import 'package:lottie/lottie.dart';
 import "home_page.dart";
 import "signup.dart";
 import "package:animated_background/animated_background.dart";
+import 'package:groceryapp/model/cart_model.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
