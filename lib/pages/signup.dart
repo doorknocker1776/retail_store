@@ -6,6 +6,8 @@ import 'package:groceryapp/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import "package:animated_background/animated_background.dart";
 import 'package:lottie/lottie.dart';
+import 'package:http/http.dart' as http;
+
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
   const RegisterPage({super.key, required this.onTap});
@@ -14,7 +16,8 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin{
+class _RegisterPageState extends State<RegisterPage>
+    with TickerProviderStateMixin {
   // text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -49,9 +52,10 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Padding(padding: EdgeInsets.fromLTRB(110, 0, 110, 0),
-              child:
-              Lottie.network("https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(110, 0, 110, 0),
+                  child: Lottie.network(
+                      "https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
                 ),
                 // logo
                 // let's create an account for you
@@ -83,7 +87,6 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
 
                 const SizedBox(height: 10),
 
-
                 // confirm password textfield
                 MyTextField(
                   controller: confirmPasswordController,
@@ -104,7 +107,11 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 // sign in button
                 MyButton(
                   text: "Sign Up",
-                  onTap: (){},
+                  onTap: () {
+                    Future<http.Response> response;
+                    response = http.post((Uri.parse(
+                        "http://10.0.2.2:5000/get_user?UserID=${emailController.text}&Password=${passwordController.text}")));
+                  },
                 ),
 
                 // or continue with
@@ -151,7 +158,6 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                         style: TextStyle(color: Colors.blue),
                       ),
                     )
-
                   ],
                 )
               ],
