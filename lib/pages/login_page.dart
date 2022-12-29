@@ -29,13 +29,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: Colors.orange,
       body:
       AnimatedBackground(
         vsync: this,
         behaviour: BubblesBehaviour(
         options: BubbleOptions(
-          bubbleCount: 5,
+          bubbleCount:5,
           growthRate: 25,
           popRate: 150
         )

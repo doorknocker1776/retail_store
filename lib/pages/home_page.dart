@@ -29,7 +29,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 158, 22),
         leading: Padding(
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         ),
         title: Text(
           'Islamabad, Pakistan',
-          style: TextStyle(
+          style: GoogleFonts.openSans(
             fontSize: 20,
             color: Colors.black,
           ),
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade300,
         color: Color.fromARGB(255, 255, 158, 22),
         animationDuration: Duration(milliseconds: 450),
         onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(left: 110),
             child: Text(
               "Categories:",
-              style: GoogleFonts.notoSerif(
+              style: GoogleFonts.openSans(
                 //fontWeight: FontWeight.bold,
                 fontSize: 36,
                 fontWeight: FontWeight.bold,

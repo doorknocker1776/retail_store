@@ -1,4 +1,4 @@
-//'import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -139,17 +139,8 @@ class _NuPageState extends State<NuPage> {
                       imagePath: value.newItems[index][2],
                       color: value.newItems[index][3],
                       onPressed: () {
-                        if(index == 0){
-                        }
-                        if(index == 1){
-                        }
-                        if(index == 2){
-                        }
-                        if(index == 3){
-                        }
-                      },
-                      // Provider.of<HomeModel>(context, listen: false)
-                      //     .addItemToCart(index),
+                      Provider.of<CartModel>(context, listen: false).addItemToCart(value.newItems[index]);
+                    },
                     );
                   },
                 );
