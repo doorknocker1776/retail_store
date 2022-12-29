@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import "package:animated_background/animated_background.dart";
 import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -23,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage>
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final bankaccountcontroller = TextEditingController();
-
+  final banknamecontroller = TextEditingController();
   // error message to user
   void showErrorMessage(String message) {
     showDialog(
@@ -102,6 +103,12 @@ class _RegisterPageState extends State<RegisterPage>
                   obscureText: false,
                 ),
 
+                MyTextField(
+                  controller: banknamecontroller,
+                  hintText: 'Bank Name',
+                  obscureText: false,
+                ),
+
                 const SizedBox(height: 25),
 
                 // sign in button
@@ -109,8 +116,18 @@ class _RegisterPageState extends State<RegisterPage>
                   text: "Sign Up",
                   onTap: () {
                     Future<http.Response> response;
-                    response = http.post((Uri.parse(
-                        "http://10.0.2.2:5000/get_user?UserID=${emailController.text}&Password=${passwordController.text}")));
+                    response = http.get((Uri.parse(
+                        "http://10.0.2.2:5000/get_user?UserID=${emailController.text}&Password=${passwordController.text}&Bank_Name=${banknamecontroller.text}&Account_No=${bankaccountcontroller.text}")));
+                    response.then((http.Response res) {
+                      final data = json.decode(res.body);
+                      if (data['status'] == 'success') {
+                        print("success");
+                        // If the login was successful, do something
+                      } else {
+                        print("no success");
+                        // If the login was not successful, do something else
+                      }
+                    });
                   },
                 ),
 

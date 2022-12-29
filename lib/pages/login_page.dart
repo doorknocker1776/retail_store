@@ -9,6 +9,9 @@ import 'package:lottie/lottie.dart';
 import "home_page.dart";
 import "signup.dart";
 import "package:animated_background/animated_background.dart";
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
@@ -16,28 +19,37 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   final usernameController = TextEditingController();
 
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() {}
+  void signUserIn() {
+    Future<http.Response> response;
+    response = http.get((Uri.parse(
+        "http://10.0.2.2:5000/login?UserID=${usernameController.text}&Password=${passwordController.text}")));
+    response.then((http.Response res) {
+      final data = json.decode(res.body);
+      if (data['status'] == 'success') {
+        print("success");
+        // If the login was successful, do something
+      } else {
+        print("no success");
+        // If the login was not successful, do something else
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orangeAccent,
-      body:
-      AnimatedBackground(
+      body: AnimatedBackground(
         vsync: this,
         behaviour: BubblesBehaviour(
-        options: BubbleOptions(
-          bubbleCount: 5,
-          growthRate: 25,
-          popRate: 150
-        )
-        ),
+            options:
+                BubbleOptions(bubbleCount: 5, growthRate: 25, popRate: 150)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -56,10 +68,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
               Text(
                 'Welcome back, you\'ve been missed!',
                 style: GoogleFonts.openSans(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
-                ),
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 25),
@@ -87,21 +98,19 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children:
-                  [
+                  children: [
                     GestureDetector(
-                    onTap: () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return HomePage();
-                  },
-                ),
-              ),
+                      onTap: () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return HomePage();
+                          },
+                        ),
+                      ),
                       child: Text(
                         'Continue as guest',
-                        style: GoogleFonts.openSans
-                          (color: Colors.black),
+                        style: GoogleFonts.openSans(color: Colors.black),
                       ),
                     )
                   ],
@@ -145,9 +154,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
                 children: [
                   Text(
                     'Not a member?',
-                    style: TextStyle(color: Colors.grey[700],
-                      fontSize: 15
-                    ),
+                    style: TextStyle(color: Colors.grey[700], fontSize: 15),
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
@@ -164,12 +171,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
                       style: TextStyle(color: Colors.blue[800]),
                     ),
                   )
-
                 ],
               ),
-          ],
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
