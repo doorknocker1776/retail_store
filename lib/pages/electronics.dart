@@ -1,4 +1,3 @@
-//'import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -11,12 +10,6 @@ import 'package:groceryapp/pages/home_page.dart';
 import 'package:groceryapp/model/items_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'filehandling.dart';
-import 'dart:async';
-
-
 
 class ElecPage extends StatefulWidget {
   const ElecPage({super.key});
@@ -139,17 +132,8 @@ class _ElecPageState extends State<ElecPage> {
                       imagePath: value.elecItems[index][2],
                       color: value.elecItems[index][3],
                       onPressed: () {
-                        if(index == 0){
-                        }
-                        if(index == 1){
-                        }
-                        if(index == 2){
-                        }
-                        if(index == 3){
-                        }
+                        Provider.of<CartModel>(context, listen: false).addItemToCart(value.elecItems[index]);
                       },
-                      // Provider.of<HomeModel>(context, listen: false)
-                      //     .addItemToCart(index),
                     );
                   },
                 );

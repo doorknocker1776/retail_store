@@ -5,12 +5,12 @@ import 'package:groceryapp/model/cart_model.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "home_page.dart";
-import 'package:groceryapp/model/cart_model.dart';
 List _cartItems = [
   ["IPhone 12 Pro Max", "42.33", "lib/images/iphone.png", Colors.orange],
-  ["PS5", "9999.999", "lib/images/ps5.png", Colors.orange],
+  ["PS5", "9911199.999", "lib/images/ps5.png", Colors.orange],
   ["Desktop PC", "9913", "lib/images/pc.png", Colors.orange],
   ["Washing Machine", "42.33", "lib/images/washingmachine.png", Colors.orange],
+  ["Chicken","30","lib/images/chicken.png",Colors.redAccent]
 ];
 
 get cartItems => _cartItems;
@@ -91,15 +91,51 @@ class _CartPage extends State<CartPage> {
         builder: (context, value, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-
-
-
             children: [
               // Let's order fresh items for you
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0),
               ),
               // list view of cart
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: ListView.builder(
+                    itemCount: value.cartItems.length,
+                    padding: EdgeInsets.all(12),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(8)),
+                          child: ListTile(
+                            leading: Image.asset(
+                              value.cartItems[index][2],
+                              height: 36,
+                            ),
+                            title: Text(
+                              value.cartItems[index][0],
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                            subtitle: Text(
+                              '\$' + value.cartItems[index][1],
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.cancel),
+                              onPressed: () =>
+                                  Provider.of<CartModel>(context, listen: false)
+                                      .removeItemFromCart(index),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
                             // total amount + pay now
 
               Padding(
@@ -107,7 +143,7 @@ class _CartPage extends State<CartPage> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.red,
+                    color: Colors.redAccent,
                   ),
                   padding: const EdgeInsets.all(24),
                   child: Row(
@@ -124,7 +160,7 @@ class _CartPage extends State<CartPage> {
                           const SizedBox(height: 8),
                           // total price
                           Text(
-                            '\PKR ${value.calculateTotal()}',
+                            '\$${value.calculateTotal()}',
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

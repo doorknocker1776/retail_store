@@ -122,7 +122,7 @@ class _NuPageState extends State<NuPage> {
 
           // recent orders -> show last 3
           Expanded(
-            child: Consumer<ElectronicItems>(
+            child: Consumer<NewItems>(
               builder: (context, value, child) {
                 return GridView.builder(
                   padding: const EdgeInsets.all(20),

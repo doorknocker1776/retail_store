@@ -1,4 +1,3 @@
-//'import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -11,12 +10,6 @@ import 'package:groceryapp/pages/home_page.dart';
 import 'package:groceryapp/model/items_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'filehandling.dart';
-import 'dart:async';
-
-
 
 class FashPage extends StatefulWidget {
   const FashPage({super.key});
@@ -122,7 +115,7 @@ class _FashPageState extends State<FashPage> {
 
           // recent orders -> show last 3
           Expanded(
-            child: Consumer<ElectronicItems>(
+            child: Consumer<FashionItems>(
               builder: (context, value, child) {
                 return GridView.builder(
                   padding: const EdgeInsets.all(20),
@@ -139,17 +132,8 @@ class _FashPageState extends State<FashPage> {
                       imagePath: value.fashItems[index][2],
                       color: value.fashItems[index][3],
                       onPressed: () {
-                        if(index == 0){
-                        }
-                        if(index == 1){
-                        }
-                        if(index == 2){
-                        }
-                        if(index == 3){
-                        }
+                        Provider.of<CartModel>(context, listen: false).addItemToCart(value.fashItems[index]);
                       },
-                      // Provider.of<HomeModel>(context, listen: false)
-                      //     .addItemToCart(index),
                     );
                   },
                 );
