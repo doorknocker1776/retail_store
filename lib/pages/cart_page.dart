@@ -8,16 +8,6 @@ import "home_page.dart";
 import 'search.dart';
 import "payment.dart";
 
-List _cartItems = [
-  ["IPhone 12 Pro Max", "42.33", "lib/images/iphone.png", Colors.orange],
-  ["PS5", "9911199.999", "lib/images/ps5.png", Colors.orange],
-  ["Desktop PC", "9913", "lib/images/pc.png", Colors.orange],
-  ["Washing Machine", "42.33", "lib/images/washingmachine.png", Colors.orange],
-  ["Chicken", "30", "lib/images/chicken.png", Colors.redAccent]
-];
-
-get cartItems => _cartItems;
-
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
