@@ -12,6 +12,8 @@ import "package:animated_background/animated_background.dart";
 import 'package:groceryapp/model/cart_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import "signup.dart" as signup;
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -24,7 +26,22 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   final usernameController = TextEditingController();
 
   final passwordController = TextEditingController();
-
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Center(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+        );
+      },
+    );
+  }
   // sign user in method
   void signUserIn() {
     Future<http.Response> response;
@@ -33,11 +50,20 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     response.then((http.Response res) {
       final data = json.decode(res.body);
       if (data['status'] == 'success') {
-        print("success");
-        // If the login was successful, do something
-      } else {
-        print("no success");
-        // If the login was not successful, do something else
+
+        return Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return HomePage();
+              },
+            )
+        );
+      }
+      else {
+        child:
+        showErrorMessage(
+            "Error! Incorrect Credentials.");
       }
     });
   }
@@ -50,7 +76,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         vsync: this,
         behaviour: BubblesBehaviour(
             options:
-                BubbleOptions(bubbleCount: 5, growthRate: 25, popRate: 150)),
+            BubbleOptions(bubbleCount: 5, growthRate: 25, popRate: 150)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
