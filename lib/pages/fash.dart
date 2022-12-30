@@ -20,6 +20,7 @@ class FashPage extends StatefulWidget {
 class _FashPageState extends State<FashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 158, 22),
@@ -60,9 +61,10 @@ class _FashPageState extends State<FashPage> {
           ),
         ],
       ),
-      bottomNavigationBar: CurvedNavigationBar(
+      extendBody: true,
+        bottomNavigationBar: CurvedNavigationBar(
         height: 50,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         color: Color.fromARGB(255, 255, 158, 22),
         animationDuration: Duration(milliseconds: 450),
         onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {

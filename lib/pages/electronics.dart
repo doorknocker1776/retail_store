@@ -60,9 +60,10 @@ class _ElecPageState extends State<ElecPage> {
           ),
         ],
       ),
+      extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         color: Color.fromARGB(255, 255, 158, 22),
         animationDuration: Duration(milliseconds: 450),
         onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
