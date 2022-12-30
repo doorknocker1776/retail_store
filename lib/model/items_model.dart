@@ -1,21 +1,36 @@
-
 import 'package:flutter/material.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'package:groceryapp/model/home_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ElectronicItems extends ChangeNotifier {
   // list of items on sale
+  void makelist(List<String> X) {
+    Future<http.Response> response;
+    response = http.get((Uri.parse("http://10.0.2.2:5000/populate?A=[]}")));
+    response.then((http.Response res) {
+      final data = json.decode(res.body);
+      X = data['status'];
+    });
+  }
+
+  void main() {
+    List<String> A = [];
+    makelist(A);
+  }
+
   List _elecItems = [
     // [ itemName, itemPrice, imagePath, color ]
     ["IPhone", "42.33", "lib/images/iphone.png", Colors.orange],
     ["PS5", "9999.999", "lib/images/ps5.png", Colors.orange],
     ["PC", "9913", "lib/images/pc.png", Colors.orange],
-    ["WashingMachine", "42.33", "lib/images/washingmachine.png", Colors.orange],
+    ["WashingMachine", "44.33", "lib/images/washingmachine.png", Colors.orange],
   ];
   get elecItems => _elecItems;
-
 }
+
 class FashionItems extends ChangeNotifier {
   List _fashItems = [
     // [ itemName, itemPrice, imagePath, color ]
@@ -26,7 +41,6 @@ class FashionItems extends ChangeNotifier {
   ];
   get fashItems => _fashItems;
 }
-
 
 class GroceryItems extends ChangeNotifier {
   List _groceryItems = [
@@ -39,16 +53,15 @@ class GroceryItems extends ChangeNotifier {
 
   get groceryItems => _groceryItems;
 }
-class NewItems extends ChangeNotifier{
-List  _newItems = [
-  // [ itemName, itemPrice, imagePath, color ]
-  ["Car", "42.33", "lib/images/car.png", Colors.orange],
-  ["EarPods", "9999.999", "lib/images/earpods.png", Colors.orange],
-  ["Robot", "9913", "lib/images/robot.png", Colors.orange],
-  ["NuclearWarHead", "42.33", "lib/images/nuke.png", Colors.orange],
-];
 
-get newItems => _newItems;
+class NewItems extends ChangeNotifier {
+  List _newItems = [
+    // [ itemName, itemPrice, imagePath, color ]
+    ["Car", "42.33", "lib/images/car.png", Colors.orange],
+    ["EarPods", "9999.999", "lib/images/earpods.png", Colors.orange],
+    ["Robot", "9913", "lib/images/robot.png", Colors.orange],
+    ["NuclearWarHead", "42.33", "lib/images/nuke.png", Colors.orange],
+  ];
 
-
+  get newItems => _newItems;
 }

@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import "package:animated_background/animated_background.dart";
 import 'package:lottie/lottie.dart';
 import 'package:groceryapp/model/cart_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -16,9 +18,9 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin{
+class _RegisterPageState extends State<RegisterPage>
+    with TickerProviderStateMixin {
   // text editing controllers
-  final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -53,15 +55,13 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Padding(padding: EdgeInsets.fromLTRB(110, 0, 110, 0),
-              child:
-              Lottie.network("https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(110, 0, 110, 0),
+                  child: Lottie.network(
+                      "https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
                 ),
                 // logo
                 // let's create an account for you
-
-
-                // email textfield
 
                 MyTextField(
                   controller: usernameController,
@@ -79,7 +79,6 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 ),
 
                 const SizedBox(height: 10),
-
 
                 // confirm password textfield
                 MyTextField(
@@ -107,29 +106,59 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
 
                 // sign in button
                 MyButton(
-                  text: "Sign Up",
-                  onTap: (){
-                    String bnk = bankaccountcontroller.text;
-                    String password =  passwordController.text;
-                    String cpassword = confirmPasswordController.text;
-                    String email = emailController.text;
-                    String username = usernameController.text;
-                    String bnkname = bankaccountNamecontroller.text;
-                    List<String> banknames = ["Chase", "JP Morgan"];
-                    if(username.length < 5) {child: showErrorMessage("Username Must be longer than 5");}
-                    else if((RegExp(r'^[0-9]+$').hasMatch(username))) {child: showErrorMessage("Username cannot be all digits");}
-                    else if (password == username) {
-                      child: showErrorMessage("Error: Password cannot be the same as the username");
-                    } else if (password != cpassword) {
-                      child: showErrorMessage("Error: Password and confirm password do not match");
-                    }
-                    else if(!RegExp(r'^[0-9]+$').hasMatch(bnk)) {
-                      child: showErrorMessage("Error: Bank number must contain only numbers");}
-                    else if(!(banknames.contains(bnkname))) {child: showErrorMessage("Error: Bank Name not supported");}
-
-                  },
-
-                ),
+                    text: "Sign Up",
+                    onTap: () {
+                      String bnk = bankaccountcontroller.text;
+                      String password = passwordController.text;
+                      String cpassword = confirmPasswordController.text;
+                      String username = usernameController.text;
+                      String bnkname = bankaccountNamecontroller.text;
+                      List<String> banknames = [
+                        "Chase",
+                        "JP Morgan",
+                        "Meezan",
+                        "MCB",
+                        "HBL",
+                        "BOP"
+                      ];
+                      if (username.length < 5) {
+                        child:
+                        showErrorMessage("Username Must be longer than 5");
+                      } else if ((RegExp(r'^[0-9]+$').hasMatch(username))) {
+                        child:
+                        showErrorMessage("Username cannot be all digits");
+                      } else if (password == username) {
+                        child:
+                        showErrorMessage(
+                            "Error: Password cannot be the same as the username");
+                      } else if (password != cpassword) {
+                        child:
+                        showErrorMessage(
+                            "Error: Password and confirm password do not match");
+                      } else if (!RegExp(r'^[0-9]+$').hasMatch(bnk)) {
+                        child:
+                        showErrorMessage(
+                            "Error: Bank number must contain only numbers");
+                      } else if (!(banknames.contains(bnkname))) {
+                        child:
+                        showErrorMessage("Error: Bank Name not supported");
+                      } else {
+                        Future<http.Response> response;
+                        response = http.get((Uri.parse(
+                            "http://10.0.2.2:5000/get_user?UserID=${usernameController.text}&Password=${passwordController.text}&Bank_Name=${bankaccountNamecontroller.text}&Account_No=${bankaccountcontroller.text}")));
+                        response.then((http.Response res) {
+                          final data = json.decode(res.body);
+                          if (data['status'] == 'success') {
+                            print("success");
+                            // If the login was successful, do something
+                          } else {
+                            child:
+                            showErrorMessage(
+                                "Error: Invalid Entry(s). Username could be taken, try again.");
+                          }
+                        });
+                      }
+                    }),
 
                 // or continue with
                 Padding(
@@ -175,7 +204,6 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                         style: TextStyle(color: Colors.blue),
                       ),
                     )
-
                   ],
                 )
               ],
