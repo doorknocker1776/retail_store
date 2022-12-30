@@ -7,18 +7,17 @@ import 'dart:convert';
 
 class ElectronicItems extends ChangeNotifier {
   // list of items on sale
-  void makelist(List<String> X) {
+  List _ElecItems = [];
+
+  get elecItems => _ElecItems;
+  // list of items on sale
+  void makelist() {
     Future<http.Response> response;
     response = http.get((Uri.parse("http://10.0.2.2:5000/populate?A=[]}")));
     response.then((http.Response res) {
       final data = json.decode(res.body);
-      X = data['status'];
+      _ElecItems = data['status'];
     });
-  }
-
-  void main() {
-    List<String> A = [];
-    makelist(A);
   }
 
   List _elecItems = [
@@ -28,7 +27,7 @@ class ElectronicItems extends ChangeNotifier {
     ["PC", "9913", "lib/images/pc.png", Colors.orange],
     ["WashingMachine", "44.33", "lib/images/washingmachine.png", Colors.orange],
   ];
-  get elecItems => _elecItems;
+  //get elecItems => _elecItems;
 }
 
 class FashionItems extends ChangeNotifier {
