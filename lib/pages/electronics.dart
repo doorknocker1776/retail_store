@@ -128,11 +128,12 @@ class _ElecPageState extends State<ElecPage> {
                   itemBuilder: (context, index) {
                     return GroceryItemTile(
                       itemName: value.elecItems[index][0],
-                      itemPrice: value.elecItems[index][1],
+                      itemPrice: value.elecItems[index][1] + " PKR",
                       imagePath: value.elecItems[index][2],
                       color: value.elecItems[index][3],
                       onPressed: () {
-                        Provider.of<CartModel>(context, listen: false).addItemToCart(value.elecItems[index]);
+                        Provider.of<CartModel>(context, listen: false)
+                            .addItemToCart(value.elecItems[index]);
                       },
                     );
                   },

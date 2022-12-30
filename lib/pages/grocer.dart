@@ -11,8 +11,6 @@ import 'package:groceryapp/model/items_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'dart:async';
 
-
-
 class GroPage extends StatefulWidget {
   const GroPage({super.key});
   @override
@@ -130,11 +128,12 @@ class _GPageState extends State<GroPage> {
                   itemBuilder: (context, index) {
                     return GroceryItemTile(
                       itemName: value.groceryItems[index][0],
-                      itemPrice: value.groceryItems[index][1],
+                      itemPrice: value.groceryItems[index][1] + " PKR",
                       imagePath: value.groceryItems[index][2],
                       color: value.groceryItems[index][3],
                       onPressed: () {
-                        Provider.of<CartModel>(context, listen: false).addItemToCart(value.groceryItems[index]);
+                        Provider.of<CartModel>(context, listen: false)
+                            .addItemToCart(value.groceryItems[index]);
                       },
                     );
                   },

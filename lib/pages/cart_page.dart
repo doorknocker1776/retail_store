@@ -6,12 +6,14 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
 import "home_page.dart";
 import 'search.dart';
+import "payment.dart";
+
 List _cartItems = [
   ["IPhone 12 Pro Max", "42.33", "lib/images/iphone.png", Colors.orange],
   ["PS5", "9911199.999", "lib/images/ps5.png", Colors.orange],
   ["Desktop PC", "9913", "lib/images/pc.png", Colors.orange],
   ["Washing Machine", "42.33", "lib/images/washingmachine.png", Colors.orange],
-  ["Chicken","30","lib/images/chicken.png",Colors.redAccent]
+  ["Chicken", "30", "lib/images/chicken.png", Colors.redAccent]
 ];
 
 get cartItems => _cartItems;
@@ -23,16 +25,14 @@ class CartPage extends StatefulWidget {
   State<CartPage> createState() => _CartPage();
 }
 
-
 class _CartPage extends State<CartPage> {
   int index = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-        Text(
-            "Cart",
+        title: Text(
+          "Cart",
           style: GoogleFonts.openSans(
             fontSize: 30,
             color: Colors.black,
@@ -52,24 +52,21 @@ class _CartPage extends State<CartPage> {
         backgroundColor: Colors.white,
         color: Colors.orange,
         animationDuration: Duration(milliseconds: 450),
-
-        onTap: (index) => Future.delayed(Duration(milliseconds: 550),() {
+        onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
                 if (index == 0) {
                   return HomePage();
-                }
-                else if (index == 1) {
+                } else if (index == 1) {
                   return SearchPage();
                 }
                 return CartPage();
               },
             ),
           );
-        }
-        ),
+        }),
         items: [
           Icon(
             Icons.home,
@@ -85,10 +82,7 @@ class _CartPage extends State<CartPage> {
           ),
         ],
       ),
-      body:
-
-
-      Consumer<CartModel>(
+      body: Consumer<CartModel>(
         builder: (context, value, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +115,7 @@ class _CartPage extends State<CartPage> {
                               style: const TextStyle(fontSize: 18),
                             ),
                             subtitle: Text(
-                              '\$' + value.cartItems[index][1],
+                              '\PKR' + value.cartItems[index][1],
                               style: const TextStyle(fontSize: 12),
                             ),
                             trailing: IconButton(
@@ -137,7 +131,7 @@ class _CartPage extends State<CartPage> {
                   ),
                 ),
               ),
-                            // total amount + pay now
+              // total amount + pay now
 
               Padding(
                 padding: const EdgeInsets.all(36.0),
@@ -161,7 +155,7 @@ class _CartPage extends State<CartPage> {
                           const SizedBox(height: 8),
                           // total price
                           Text(
-                            '\$${value.calculateTotal()}',
+                            '\PKR ${value.calculateTotal()}',
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -173,25 +167,29 @@ class _CartPage extends State<CartPage> {
 
                       // pay now
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.green.shade200),
-                          borderRadius: BorderRadius.circular(28),
-                        ),
-                        padding: const EdgeInsets.all(12),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'Pay Now',
-                              style: TextStyle(color: Colors.white),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.green.shade200),
+                            borderRadius: BorderRadius.circular(28),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(
+                                builder: (context) {
+                                  return PaymentPage();
+                                },
+                              ));
+                            },
+                            child: Text(
+                              "Pay Now",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.orange,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 16,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
+                          )),
                     ],
                   ),
                 ),
@@ -203,5 +201,3 @@ class _CartPage extends State<CartPage> {
     );
   }
 }
-
-

@@ -10,7 +10,6 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Profile"),
         backgroundColor: Colors.orange,
-
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -28,32 +27,18 @@ class AccountPage extends StatelessWidget {
             SizedBox(height: 16),
             // Name
             Text(
-              "John Doe",
+              "Suhaib Aslam",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 8),
-            // Email
-            Text(
-              "johndoe@example.com",
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 8),
             // Phone number
-            Text(
-              "+1 123 456 7890",
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
             SizedBox(height: 8),
             // Total orders
             Text(
-              "Total orders: 20",
+              "Total orders: 0",
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -65,7 +50,8 @@ class AccountPage extends StatelessWidget {
                 // Navigate to the Edit Profile page
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.orange),
               ),
               child: Text(
                 "Edit Profile",

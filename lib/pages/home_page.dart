@@ -17,8 +17,6 @@ import 'package:groceryapp/pages/fash.dart';
 import 'package:groceryapp/pages/grocer.dart';
 import 'package:groceryapp/pages/newarr.dart';
 
-
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -50,14 +48,16 @@ class _HomePageState extends State<HomePage> {
         titleSpacing: -12,
         actions: [
           GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return AccountPage();
-                },
-              ),
-            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return AccountPage();
+                  },
+                ),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.only(right: 15.0),
               child: Icon(
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                       imagePath: value.shopItems[index][2],
                       color: value.shopItems[index][3],
                       onPressed: () {
-                        if(index == 0){
+                        if (index == 0) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         }
-                        if(index == 1){
+                        if (index == 1) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         }
-                        if(index == 2){
+                        if (index == 2) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         }
-                        if(index == 3){
+                        if (index == 3) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

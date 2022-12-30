@@ -128,11 +128,12 @@ class _FashPageState extends State<FashPage> {
                   itemBuilder: (context, index) {
                     return GroceryItemTile(
                       itemName: value.fashItems[index][0],
-                      itemPrice: value.fashItems[index][1],
+                      itemPrice: value.fashItems[index][1] + " PKR",
                       imagePath: value.fashItems[index][2],
                       color: value.fashItems[index][3],
                       onPressed: () {
-                        Provider.of<CartModel>(context, listen: false).addItemToCart(value.fashItems[index]);
+                        Provider.of<CartModel>(context, listen: false)
+                            .addItemToCart(value.fashItems[index]);
                       },
                     );
                   },

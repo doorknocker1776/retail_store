@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +14,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'filehandling.dart';
 import 'dart:async';
-
-
 
 class NuPage extends StatefulWidget {
   const NuPage({super.key});
@@ -135,12 +132,13 @@ class _NuPageState extends State<NuPage> {
                   itemBuilder: (context, index) {
                     return GroceryItemTile(
                       itemName: value.newItems[index][0],
-                      itemPrice: value.newItems[index][1],
+                      itemPrice: value.newItems[index][1] + " PKR",
                       imagePath: value.newItems[index][2],
                       color: value.newItems[index][3],
                       onPressed: () {
-                      Provider.of<CartModel>(context, listen: false).addItemToCart(value.newItems[index]);
-                    },
+                        Provider.of<CartModel>(context, listen: false)
+                            .addItemToCart(value.newItems[index]);
+                      },
                     );
                   },
                 );

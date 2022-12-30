@@ -56,14 +56,39 @@ def login():
             return jsonify({'status': 'failed'})
     except:
         return jsonify({'status': 'failed'})
-@app.route('/populate', methods=['POST', 'GET'])
-def populate():
+@app.route('/pay', methods=['POST', 'GET'])
+def pay():
+        # Get the user data from the request
+    username = request.args.get('UserID')
+    print(username)
+    password = request.args.get('Password')
+    print(password)
+    bank_account_number = request.args.get('Account_No')
+    bank_name = request.args.get('Bank_Name')
     cursor = cnx.cursor()
-    query = f"Select Name from online_store.item;"
-    cursor.execute(query)
-    result = cursor.fetchall()
-    print(result)
-    result = list(result)
-    return jsonify({'status' : result})
+    try:
+        query = f"Select * from online_store.Customer where UserID='{username}';"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        if result==None:
+                query = f"INSERT INTO online_store.Customer (UserID, Password) VALUES ('{username}', '{password}');"
+                cursor.execute(query)      
+                query = f"Select Count(*) from online_store.Customer";
+                cursor.execute(query)
+                result1 = cursor.fetchall()
+                if result1 == None: 
+                    result1 = 1 
+                query = f"INSERT INTO online_store.Account (Account_No, Bank_Name, Customer_ID) VALUES ({bank_account_number}, '{bank_name}', {result[0]});"
+                cursor.execute(query)  
+                return jsonify({'status': 'success'})
+        else:
+                query = f"Select Customer_ID from online_store.Customer where UserID='{username}' and Password='{password}';"
+                cursor.execute(query)
+                result = cursor.fetchone()
+                query = f"INSERT INTO online_store.Account (Account_No, Bank_Name, Customer_ID) VALUES ({bank_account_number}, '{bank_name}', {result[0]});"
+                cursor.execute(query)  
+                return jsonify({'status': 'success'})               
+    except:
+        return jsonify({'status': 'failed'})
 if __name__ == '__main__':
   app.run()
