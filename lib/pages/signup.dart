@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final bankaccountcontroller = TextEditingController();
+  final bankaccountNamecontroller = TextEditingController();
 
   // error message to user
   void showErrorMessage(String message) {
@@ -61,12 +62,6 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
 
 
                 // email textfield
-                MyTextField(
-                  controller: emailController,
-                  hintText: 'Email',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 10),
 
                 MyTextField(
                   controller: usernameController,
@@ -100,6 +95,13 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                   hintText: 'Bank Account Number',
                   obscureText: false,
                 ),
+                const SizedBox(height: 10),
+
+                MyTextField(
+                  controller: bankaccountNamecontroller,
+                  hintText: 'Bank Account Name',
+                  obscureText: false,
+                ),
 
                 const SizedBox(height: 15),
 
@@ -112,11 +114,20 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                     String cpassword = confirmPasswordController.text;
                     String email = emailController.text;
                     String username = usernameController.text;
+                    String bnkname = bankaccountNamecontroller.text;
+                    List<String> banknames = ["Chase", "JP Morgan"];
+                    if(username.length < 5) {child: showErrorMessage("Username Must be longer than 5");}
+                    else if((RegExp(r'^[0-9]+$').hasMatch(username))) {child: showErrorMessage("Username cannot be all digits");}
+                    else if (password == username) {
+                      child: showErrorMessage("Error: Password cannot be the same as the username");
+                    } else if (password != cpassword) {
+                      child: showErrorMessage("Error: Password and confirm password do not match");
+                    }
+                    else if(!RegExp(r'^[0-9]+$').hasMatch(bnk)) {
+                      child: showErrorMessage("Error: Bank number must contain only numbers");}
+                    else if(!(banknames.contains(bnkname))) {child: showErrorMessage("Error: Bank Name not supported");}
 
-                    if(!RegExp(r'^[^@]+@[^@]+\.[^@]+$').hasMatch(email))
-                    {child: showErrorMessage("Invalid Email");}
-                    else if(true) {}
-                    },
+                  },
 
                 ),
 
