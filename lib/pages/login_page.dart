@@ -14,7 +14,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import "signup.dart" as signup;
 
-
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
@@ -42,6 +41,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       },
     );
   }
+
   // sign user in method
   void signUserIn() {
     Future<http.Response> response;
@@ -50,20 +50,14 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     response.then((http.Response res) {
       final data = json.decode(res.body);
       if (data['status'] == 'success') {
-
-        return Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return HomePage();
-              },
-            )
-        );
-      }
-      else {
+        return Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) {
+            return HomePage();
+          },
+        ));
+      } else {
         child:
-        showErrorMessage(
-            "Error! Incorrect Credentials.");
+        showErrorMessage("Error! Incorrect Credentials.");
       }
     });
   }
@@ -76,7 +70,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         vsync: this,
         behaviour: BubblesBehaviour(
             options:
-            BubbleOptions(bubbleCount: 5, growthRate: 25, popRate: 150)),
+                BubbleOptions(bubbleCount: 5, growthRate: 25, popRate: 150)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

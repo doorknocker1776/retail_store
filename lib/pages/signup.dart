@@ -149,17 +149,13 @@ class _RegisterPageState extends State<RegisterPage>
                         response.then((http.Response res) {
                           final data = json.decode(res.body);
                           if (data['status'] == 'success') {
-
-                            return Navigator.pushReplacement(
-                                context,
+                            return Navigator.pushReplacement(context,
                                 MaterialPageRoute(
-                                  builder: (context) {
-                                    return LoginPage();
-                                  },
-                                )
-                            );
-                          }
-                          else {
+                              builder: (context) {
+                                return LoginPage();
+                              },
+                            ));
+                          } else {
                             child:
                             showErrorMessage(
                                 "Error: Invalid Entry(s). Username could be taken, try again.");

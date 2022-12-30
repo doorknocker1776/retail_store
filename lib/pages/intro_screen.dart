@@ -6,27 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_background/animated_background.dart';
 
-class IntroScreen extends StatefulWidget  {
+class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
 
   @override
   State<IntroScreen> createState() => _IntroScreenState();
 }
 
-class _IntroScreenState extends State<IntroScreen> with TickerProviderStateMixin{
+class _IntroScreenState extends State<IntroScreen>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange,
       body: AnimatedBackground(
         vsync: this,
-        behaviour: (
-          RacingLinesBehaviour(
+        behaviour: (RacingLinesBehaviour(
           numLines: 50,
-          )
-          ),
-        child:
-        Column(
+        )),
+        child: Column(
           children: [
             // big logo
             Padding(
@@ -36,12 +34,13 @@ class _IntroScreenState extends State<IntroScreen> with TickerProviderStateMixin
                 top: 30,
                 bottom: 40,
               ),
-              child:
-              Lottie.network("https://assets7.lottiefiles.com/packages/lf20_57TxAX.json"),
+              child: Lottie.network(
+                  "https://assets7.lottiefiles.com/packages/lf20_57TxAX.json"),
             ),
 
             Padding(
-              padding: const EdgeInsets.only(left:0,top:0,right:0,bottom:20),
+              padding:
+                  const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 20),
               child: Text(
                 'Welcome to E-Mart!',
                 textAlign: TextAlign.center,
@@ -50,9 +49,8 @@ class _IntroScreenState extends State<IntroScreen> with TickerProviderStateMixin
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom:120),
-              child:
-              Text(
+              padding: EdgeInsets.only(bottom: 120),
+              child: Text(
                 'High Quality, At a Low Price',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.openSans(
@@ -74,7 +72,8 @@ class _IntroScreenState extends State<IntroScreen> with TickerProviderStateMixin
                 ),
               ),
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 70),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 70),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: Colors.white,
