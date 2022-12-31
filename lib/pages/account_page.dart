@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:groceryapp/model/cart_model.dart';
+import 'login_page.dart';
+
+String username = "-";
 
 class AccountPage extends StatelessWidget {
-  const AccountPage({Key? key}) : super(key: key);
+  AccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class AccountPage extends StatelessWidget {
             SizedBox(height: 16),
             // Name
             Text(
-              "Suhaib Aslam",
+              username,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

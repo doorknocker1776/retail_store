@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'intro_screen.dart';
-import "home_page.dart";
+import 'home_page.dart';
 import 'search.dart';
-import "payment.dart";
+import "payment.dart" as payment;
+import 'login_page.dart' as login;
+import 'signup.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -164,12 +166,21 @@ class _CartPage extends State<CartPage> {
                           padding: const EdgeInsets.all(12),
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushReplacement(context,
-                                  MaterialPageRoute(
-                                builder: (context) {
-                                  return PaymentPage();
-                                },
-                              ));
+                              if (login.isloggedin == false) {
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(
+                                  builder: (context) {
+                                    return RegisterPage(onTap: null);
+                                  },
+                                ));
+                              } else if (login.isloggedin == true) {
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(
+                                  builder: (context) {
+                                    return payment.PaymentPage();
+                                  },
+                                ));
+                              }
                             },
                             child: Text(
                               "Pay Now",

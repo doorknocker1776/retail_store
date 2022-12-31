@@ -1,5 +1,9 @@
 ItemID,Name,Price,Desc,Availability
-1,IPhone,4200,elecItems,1
-2,PC,9913,elecItems,1
-3,PS5,9999,elecItems,1
-4,WashingMachine,5000,elecItems,1
+1,IPhone,99999,Electronics,1
+2,PC,149999,Electronics,1
+3,PS5,149999,Electronics,1
+4,WashingMachine,9999,Electronics,1
+5,Smartwatch,4999,Electronics,1
+6,Tablet,9999,Electronics,1
+7,Laptop,49999,Electronics,1
+8,Television,12999,Electronics,1

@@ -7,10 +7,9 @@ import 'package:groceryapp/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import "package:animated_background/animated_background.dart";
 import 'package:lottie/lottie.dart';
-import 'package:groceryapp/model/cart_model.dart';
+import 'package:groceryapp/model/cart_model.dart' as cart;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import "package:groceryapp/model/cart_model.dart" as cart;
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -23,11 +22,7 @@ class _PaymentPageState extends State<PaymentPage>
     with TickerProviderStateMixin {
   // text editing controllers
   final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final bankaccountcontroller = TextEditingController();
-  final bankaccountNamecontroller = TextEditingController();
-
   // error message to user
   void showErrorMessage(String message) {
     showDialog(
@@ -62,21 +57,20 @@ class _PaymentPageState extends State<PaymentPage>
                       "https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
                 ),
                 // logo
-                // let's create an account for you
+                Text(
+                  'Verify Your Credentials to Confirm Payment.',
+                  style: GoogleFonts.openSans(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 25),
 
                 MyTextField(
                   controller: usernameController,
                   hintText: 'Username',
                   obscureText: false,
-                ),
-
-                const SizedBox(height: 10),
-
-                // password textfield
-                MyTextField(
-                  controller: passwordController,
-                  hintText: 'Password',
-                  obscureText: true,
                 ),
 
                 const SizedBox(height: 10),
@@ -90,38 +84,12 @@ class _PaymentPageState extends State<PaymentPage>
 
                 const SizedBox(height: 10),
 
-                MyTextField(
-                  controller: bankaccountcontroller,
-                  hintText: 'New Bank Account Number',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 10),
-
-                MyTextField(
-                  controller: bankaccountNamecontroller,
-                  hintText: 'New Bank Account Name',
-                  obscureText: false,
-                ),
-
-                const SizedBox(height: 15),
-
-                // sign in button
+                // Payment button
                 MyButton(
-                    text: "Add Payment method",
+                    text: "Confirm Payment",
                     onTap: () {
-                      String bnk = bankaccountcontroller.text;
-                      String password = passwordController.text;
-                      String cpassword = confirmPasswordController.text;
+                      String password = confirmPasswordController.text;
                       String username = usernameController.text;
-                      String bnkname = bankaccountNamecontroller.text;
-                      List<String> banknames = [
-                        "Chase",
-                        "JP Morgan",
-                        "Meezan",
-                        "MCB",
-                        "HBL",
-                        "BOP"
-                      ];
                       if (username.length < 5) {
                         child:
                         showErrorMessage("Username Must be longer than 5");
@@ -132,29 +100,28 @@ class _PaymentPageState extends State<PaymentPage>
                         child:
                         showErrorMessage(
                             "Error: Password cannot be the same as the username");
-                      } else if (password != cpassword) {
-                        child:
-                        showErrorMessage(
-                            "Error: Password and confirm password do not match");
-                      } else if (!RegExp(r'^[0-9]+$').hasMatch(bnk)) {
-                        child:
-                        showErrorMessage(
-                            "Error: Bank number must contain only numbers");
-                      } else if (!(banknames.contains(bnkname))) {
-                        child:
-                        showErrorMessage("Error: Bank Name not supported");
                       } else {
                         Future<http.Response> response;
                         response = http.get((Uri.parse(
-                            "http://10.0.2.2:5000/pay?UserID=${usernameController.text}&Password=${passwordController.text}&Bank_Name=${bankaccountNamecontroller.text}&Account_No=${bankaccountcontroller.text}")));
+                            "http://10.0.2.2:5000/pay?UserID=${usernameController.text}&Password=${confirmPasswordController.text}")));
                         response.then((http.Response res) {
                           final data = json.decode(res.body);
                           if (data['status'] == 'success') {
                             child:
                             showErrorMessage(
-                                "Payment Method Selected and Order Placed.");
-                            CartModel().clearCart();
-                            return Navigator.pushReplacement(context,
+                                "Payment Confirmed and Order Placed.");
+                            Future<http.Response> response1;
+                            List A = [];
+                            for (int i = 0;
+                                i < cart.CartModel().cartItems.length;
+                                i++) {
+                              A.add(cart.CartModel().cartItems[i][0]);
+                            }
+                            var x = json.encode(A);
+                            response1 = http.get((Uri.parse(
+                                "http://10.0.2.2:5000/Order?UserID=${usernameController.text}&Items=${x}")));
+                            cart.CartModel().clearCart();
+                            Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                               builder: (context) {
                                 return CartPage();

@@ -4,12 +4,12 @@ int wc = 0;
 int ac = 0;
 int bc = 0;
 int cc = 0;
+List _cartItems = [];
 
 class CartModel extends ChangeNotifier {
   // list of items on sale
 
   // list of cart items
-  List _cartItems = [];
 
   get cartItems => _cartItems;
 
@@ -34,6 +34,7 @@ class CartModel extends ChangeNotifier {
   String calculateTotal() {
     double totalPrice = 0;
     for (int i = 0; i < cartItems.length; i++) {
+      print(cartItems);
       totalPrice += double.parse(cartItems[i][1]);
     }
     return totalPrice.toStringAsFixed(2);

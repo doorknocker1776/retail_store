@@ -12,14 +12,14 @@ class ElectronicItems extends ChangeNotifier {
   // list of items on sale
 
   List _elecItems = [
-    ["IPhone", "42.33", "lib/images/iphone.png", Colors.grey],
-    ["PS5", "9999.999", "lib/images/ps5.png", Colors.grey],
-    ["PC", "9913", "lib/images/pc.png", Colors.grey],
-    ["WashingMachine", "42.33", "lib/images/washingmachine.png", Colors.grey],
-    ["Smartwatch", "99.99", "lib/images/smartwatch.png", Colors.grey],
-    ["Tablet", "129.99", "lib/images/tablet.png", Colors.grey],
-    ["Laptop", "799.99", "lib/images/laptop.png", Colors.grey],
-    ["Television", "449.99", "lib/images/television.png", Colors.grey],
+    ["IPhone", "99999", "lib/images/iphone.png", Colors.grey],
+    ["PS5", "149999", "lib/images/ps5.png", Colors.grey],
+    ["PC", "199999", "lib/images/pc.png", Colors.grey],
+    ["WashingMachine", "9999", "lib/images/washingmachine.png", Colors.grey],
+    ["Smartwatch", "4999", "lib/images/smartwatch.png", Colors.grey],
+    ["Tablet", "9999", "lib/images/tablet.png", Colors.grey],
+    ["Laptop", "49999", "lib/images/laptop.png", Colors.grey],
+    ["Television", "12999", "lib/images/television.png", Colors.grey],
   ];
   get elecItems => _elecItems;
 }

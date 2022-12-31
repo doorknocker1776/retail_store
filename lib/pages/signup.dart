@@ -12,7 +12,7 @@ import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const RegisterPage({super.key, required this.onTap});
+  RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
