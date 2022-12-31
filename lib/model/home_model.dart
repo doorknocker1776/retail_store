@@ -19,5 +19,4 @@ class HomeModel extends ChangeNotifier {
   get cartItems => _cartItems;
 
   get shopItems => _shopItems;
-
 }

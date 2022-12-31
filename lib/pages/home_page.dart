@@ -16,6 +16,7 @@ import 'package:groceryapp/model/cart_model.dart';
 import 'package:groceryapp/pages/fash.dart';
 import 'package:groceryapp/pages/grocer.dart';
 import 'package:groceryapp/pages/newarr.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

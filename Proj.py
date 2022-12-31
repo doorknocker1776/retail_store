@@ -118,5 +118,55 @@ def Order():
         return jsonify({'status': 'success'})               
     except:
         return jsonify({'status': 'failed'})
+
+@app.route('/populate', methods=['POST', 'GET'])
+def Populate():
+    try:
+        cursor = cnx.cursor()
+        query = f"Select Name, Price from online_store.item where `Desc`='Electronics';"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        print(result)
+        return jsonify({'status': result})
+    except:
+        Populate()
+
+@app.route('/populate1', methods=['POST', 'GET'])
+
+def Populate1():
+    try:
+        cursor = cnx.cursor()
+        query = f"Select Name, Price from online_store.item where `Desc`='Grocery';"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        print(result)
+        return jsonify({'status': result})
+    except:
+        Populate1()
+
+@app.route('/populate2', methods=['POST', 'GET'])
+
+def Populate2():
+    try:
+        cursor = cnx.cursor()
+        query = f"Select Name, Price from online_store.item where `Desc`='Fashion';"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        print(result)
+        return jsonify({'status': result})
+    except:
+        Populate2()
+
+@app.route('/populate3', methods=['POST', 'GET'])
+def Populate3():
+    try:
+        cursor = cnx.cursor()
+        query = f"Select Name, Price from online_store.item;"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        print(result)
+        return jsonify({'status': result})
+    except:
+        Populate3()
 if __name__ == '__main__':
   app.run()
