@@ -213,7 +213,7 @@ class _CartPage extends State<CartPage> with TickerProviderStateMixin {
                               Text(
                                 'Total PKR ${value.calculateTotal() - value.discount()}',
                                 style: GoogleFonts.openSans(
-                                  fontSize: 20,
+                                  fontSize: 19,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
