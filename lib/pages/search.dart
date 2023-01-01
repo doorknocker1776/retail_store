@@ -10,6 +10,10 @@ import "home_page.dart";
 import "cart_page.dart";
 import 'package:groceryapp/model/cart_model.dart';
 import 'account_page.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:groceryapp/pages/account_page.dart' as ac;
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -21,6 +25,23 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final GlobalKey<CurvedNavigationBarState> _navigationBarKey =
       GlobalKey<CurvedNavigationBarState>();
+
+  Future<List> _getOrders() async {
+    String un = ac.username;
+    var response;
+    response = await http.get((Uri.parse(
+        "http://10.0.2.2:5000/popuorders?UserID=${un}")));
+    var jsondata = json.decode(response.body);
+    List<ordersinfo> orders = [];
+    for(int i = 0; i < jsondata['status'].length; i++){
+      ordersinfo order = ordersinfo("${jsondata['status'][i][0]}",
+          "${jsondata['status'][i][1]}","${jsondata['status'][i][2]}","${jsondata['status'][i][3]}");
+      orders.add(order);
+    }
+    print(orders.length);
+    return orders;
+  }
+
   int index = 1;
 
   @override
@@ -103,6 +124,40 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ],
       ),
+
+      body: Container(
+        child: FutureBuilder(
+          future: _getOrders(),
+          builder: (BuildContext context, AsyncSnapshot snapshot){
+            if(snapshot.data == null){
+              return Container(
+                child: Center(
+                  child: Text("Loading")
+                )
+              );
+            }
+            else{
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (BuildContext context, int index){
+                  return ListTile(
+                      title: Text("Bill: "+snapshot.data[index].billid),
+                      subtitle: Text(" Total: "+snapshot.data[index].total+"PKR Subtotal: "+snapshot.data[index].subtotal+"PKR Discount: "+snapshot.data[index].discount+"PKR"),
+                  );
+                },
+              );
+            }
+          }
+        )
+      )
     );
   }
 } //onpressed:
+
+class ordersinfo {
+  final String billid;
+  final String total;
+  final String discount;
+  final String subtotal;
+  ordersinfo(this.billid, this.total, this.discount, this.subtotal);
+}

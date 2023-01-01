@@ -6,7 +6,7 @@ app = Flask(__name__)
 cnx = mysql.connector.connect(
     host = 'localhost',
     user='root',
-    password='sns@123',
+    password='seecs@123',
     database="online_store",
     autocommit = True
 )
@@ -118,6 +118,28 @@ def Order():
         return jsonify({'status': 'success'})               
     except:
         return jsonify({'status': 'failed'})
+
+@app.route('/popuorders', methods=['POST', 'GET'])
+def popuorders():
+    try:
+
+        username = request.args.get('UserID')
+        print(username)
+
+        cursor = cnx.cursor()
+
+        query = f"Select Customer_ID from online_store.Customer where UserID='{username}';"
+        cursor.execute(query)
+        result = cursor.fetchone()
+        result = result[0]
+
+        query = f"Select bill_id, total_amount, discount, subtotal from online_store.bill where Customer_ID = {result};"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        print(result)
+        return jsonify({'status': result})
+    except:
+        popuorders()
 
 @app.route('/populate', methods=['POST', 'GET'])
 def Populate():
