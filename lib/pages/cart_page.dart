@@ -10,6 +10,7 @@ import "payment.dart" as payment;
 import 'login_page.dart' as login;
 import 'signup.dart';
 import 'account_page.dart';
+import 'package:animated_background/animated_background.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -18,7 +19,7 @@ class CartPage extends StatefulWidget {
   State<CartPage> createState() => _CartPage();
 }
 
-class _CartPage extends State<CartPage> {
+class _CartPage extends State<CartPage> with TickerProviderStateMixin {
   int index = 2;
   void showErrorMessage(String message) {
     showDialog(
@@ -117,162 +118,169 @@ class _CartPage extends State<CartPage> {
           ),
         ],
       ),
-      body: Consumer<CartModel>(
-        builder: (context, value, child) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Let's order fresh items for you
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0),
-              ),
-              // list view of cart
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: ListView.builder(
-                    itemCount: value.cartItems.length,
-                    padding: EdgeInsets.all(12),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8)),
-                          child: ListTile(
-                            leading: Image.asset(
-                              value.cartItems[index][2],
-                              height: 36,
-                            ),
-                            title: Text(
-                              value.cartItems[index][0],
-                              style: GoogleFonts.openSans(fontSize: 18),
-                            ),
-                            subtitle: Text(
-                              '\PKR' + value.cartItems[index][1],
-                              style: GoogleFonts.openSans(fontSize: 12),
-                            ),
-                            trailing: IconButton(
-                                icon: const Icon(Icons.cancel),
-                                onPressed: () {
-                                  Provider.of<CartModel>(context, listen: false)
-                                      .removeItemFromCart(index);
-                                }),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+      body: AnimatedBackground(
+        vsync: this,
+        behaviour: BubblesBehaviour(
+            options:
+                BubbleOptions(bubbleCount: 10, growthRate: 5, popRate: 150)),
+        child: Consumer<CartModel>(
+          builder: (context, value, child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Let's order fresh items for you
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.0),
                 ),
-              ),
-              // total amount + pay now
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-                child: SizedBox(
-                  height: 120,
-                  width: 800,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.redAccent,
-                    ),
-                    padding: const EdgeInsets.all(24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "SubTotal: ${value.calculateTotal()}",
-                              style: GoogleFonts.openSans(
-                                color: Colors.white,
-                                fontSize: 14,
+                // list view of cart
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: ListView.builder(
+                      itemCount: value.cartItems.length,
+                      padding: EdgeInsets.all(12),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(8)),
+                            child: ListTile(
+                              leading: Image.asset(
+                                value.cartItems[index][2],
+                                height: 36,
                               ),
-                            ),
-                            const SizedBox(height: 0),
-                            Text(
-                              'Discount: ${value.discount()}',
-                              style: GoogleFonts.openSans(
-                                color: Colors.white,
-                                fontSize: 14,
+                              title: Text(
+                                value.cartItems[index][0],
+                                style: GoogleFonts.openSans(fontSize: 18),
                               ),
-                            ),
-
-                            const SizedBox(height: 5),
-                            // total price
-                            Text(
-                              'Total PKR ${value.calculateTotal() - value.discount()}',
-                              style: GoogleFonts.openSans(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                              subtitle: Text(
+                                '\PKR' + value.cartItems[index][1],
+                                style: GoogleFonts.openSans(fontSize: 12),
                               ),
-                            ),
-                          ],
-                        ),
-
-                        // pay now
-                        SizedBox(
-                          width: 145,
-                          height: 60,
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(16),
-                                  color: Colors.orange,
-                                ),
-                                padding: const EdgeInsets.all(12),
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Colors.white)),
+                              trailing: IconButton(
+                                  icon: const Icon(Icons.cancel),
                                   onPressed: () {
-                                    if (value.calculateTotal() == 0) {
-                                      showErrorMessage(
-                                          "Cannot place order with an empty cart!");
-                                    } else {
-                                      if (login.isloggedin == false) {
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                          builder: (context) {
-                                            return RegisterPage(onTap: null);
-                                          },
-                                        ));
-                                      } else if (login.isloggedin == true) {
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                          builder: (context) {
-                                            return payment.PaymentPage();
-                                          },
-                                        ));
-                                      }
-                                    }
-                                  },
-                                  child: Text(
-                                    "Pay Now",
-                                    style: GoogleFonts.openSans(
-                                      fontSize: 18,
-                                      color: Colors.orange,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )),
+                                    Provider.of<CartModel>(context,
+                                            listen: false)
+                                        .removeItemFromCart(index);
+                                  }),
+                            ),
                           ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ),
                 ),
-              )
-            ],
-          );
-        },
+                // total amount + pay now
+
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                  child: SizedBox(
+                    height: 120,
+                    width: 800,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.redAccent,
+                      ),
+                      padding: const EdgeInsets.all(24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "SubTotal: ${value.calculateTotal()}",
+                                style: GoogleFonts.openSans(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(height: 0),
+                              Text(
+                                'Discount: ${value.discount()}',
+                                style: GoogleFonts.openSans(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+
+                              const SizedBox(height: 5),
+                              // total price
+                              Text(
+                                'Total PKR ${value.calculateTotal() - value.discount()}',
+                                style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          // pay now
+                          SizedBox(
+                            width: 145,
+                            height: 60,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: Colors.orange,
+                                  ),
+                                  padding: const EdgeInsets.all(12),
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.white)),
+                                    onPressed: () {
+                                      if (value.calculateTotal() == 0) {
+                                        showErrorMessage(
+                                            "Cannot place order with an empty cart!");
+                                      } else {
+                                        if (login.isloggedin == false) {
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return RegisterPage(onTap: null);
+                                            },
+                                          ));
+                                        } else if (login.isloggedin == true) {
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return payment.PaymentPage();
+                                            },
+                                          ));
+                                        }
+                                      }
+                                    },
+                                    child: Text(
+                                      "Pay Now",
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 18,
+                                        color: Colors.orange,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
+        ),
       ),
     );
   }

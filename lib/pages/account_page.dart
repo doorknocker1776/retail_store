@@ -14,6 +14,8 @@ import 'search.dart';
 import "payment.dart" as payment;
 import 'login_page.dart' as login;
 import 'signup.dart';
+import 'package:animated_background/animated_background.dart';
+
 String username = "-";
 String initials = username[0];
 
@@ -24,98 +26,99 @@ class AccountPage extends StatefulWidget {
   State<AccountPage> createState() => _AccountPage();
 }
 
-class _AccountPage extends State<AccountPage> {
-
+class _AccountPage extends State<AccountPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-        backgroundColor: Colors.orange,
-      ),
-
-        body: Consumer<CartModel>(
-        builder: (context, value, child) {
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Profile icon
-                CircleAvatar(
-                  radius: 48,
-                  backgroundColor: Colors.orange,
-                  child: Text(
-                    initials,
-                    style: TextStyle(fontSize: 40),
-                  ),
-                ),
-                SizedBox(height: 16),
-                // Name
-                Text(
-                  username,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                // Phone number
-                SizedBox(height: 8),
-                // Total orders
-                Text(
-                  "Total orders: 0",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                SizedBox(height: 16),
-                // Edit button
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          //YO WAHAJ MAKE EVERYTHING TO GUEST DETAILS HERE HARDCODDED STYLE!!!!
-                          username = "-";
-                          initials = username[0];
-                          Provider.of<CartModel>(context, listen: false)
-                              .nukecart();
-                          return IntroScreen();
-                        },
-                      ),
-                    );
-                  },
-                  style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.orange),
-                  ),
-                  child: Text(
-                    "Log Out/Exit",
-                    style: TextStyle(
-                      color: Colors.white,
+        appBar: AppBar(
+          title: Text("Profile"),
+          backgroundColor: Colors.orange,
+        ),
+        body: AnimatedBackground(
+          vsync: this,
+          behaviour: BubblesBehaviour(
+              options:
+                  BubbleOptions(bubbleCount: 5, growthRate: 5, popRate: 150)),
+          child: Consumer<CartModel>(builder: (context, value, child) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Profile icon
+                  CircleAvatar(
+                    radius: 48,
+                    backgroundColor: Colors.orange,
+                    child: Text(
+                      initials,
+                      style: GoogleFonts.openSans(fontSize: 40),
                     ),
                   ),
-                ),
-                SizedBox(height: 16),
-                // Recent purchases
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text("Order # $index"),
-                        subtitle: Text("\PKR X"),
+                  SizedBox(height: 16),
+                  // Name
+                  Text(
+                    username,
+                    style: GoogleFonts.openSans(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  // Phone number
+                  SizedBox(height: 8),
+                  // Total orders
+                  Text(
+                    "Total orders: 0",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  // Edit button
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            //YO WAHAJ MAKE EVERYTHING TO GUEST DETAILS HERE HARDCODDED STYLE!!!!
+                            username = "-";
+                            initials = username[0];
+                            Provider.of<CartModel>(context, listen: false)
+                                .nukecart();
+                            return IntroScreen();
+                          },
+                        ),
                       );
                     },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.orange),
+                    ),
+                    child: Text(
+                      "Log Out/Exit",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }
-    ));
+                  SizedBox(height: 16),
+                  // Recent purchases
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text("Order # $index"),
+                          subtitle: Text("\PKR X"),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ));
   }
 }
-

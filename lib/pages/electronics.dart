@@ -10,6 +10,7 @@ import 'package:groceryapp/pages/home_page.dart';
 import 'package:groceryapp/model/items_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'dart:async';
+import 'package:animated_background/animated_background.dart';
 
 class ElecPage extends StatefulWidget {
   const ElecPage({super.key});
@@ -17,10 +18,10 @@ class ElecPage extends StatefulWidget {
   State<ElecPage> createState() => _ElecPageState();
 }
 
-class _ElecPageState extends State<ElecPage> {
+class _ElecPageState extends State<ElecPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 158, 22),
         leading: Padding(
@@ -62,7 +63,7 @@ class _ElecPageState extends State<ElecPage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         color: Color.fromARGB(255, 255, 158, 22),
         animationDuration: Duration(milliseconds: 450),
         onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
@@ -95,54 +96,61 @@ class _ElecPageState extends State<ElecPage> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 24),
+      body: AnimatedBackground(
+        vsync: this,
+        behaviour: BubblesBehaviour(
+            options:
+                BubbleOptions(bubbleCount: 10, growthRate: 5, popRate: 150)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 24),
 
-          // categories -> horizontal listview
-          Padding(
-            padding: const EdgeInsets.only(left: 80),
-            child: Text(
-              "Items:",
-              style: GoogleFonts.notoSerif(
-                //fontWeight: FontWeight.bold,
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
+            // categories -> horizontal listview
+            Padding(
+              padding: const EdgeInsets.only(left: 80),
+              child: Text(
+                "Items:",
+                style: GoogleFonts.notoSerif(
+                  //fontWeight: FontWeight.bold,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
 
-          // recent orders -> show last 3
-          Expanded(
-            child: Consumer<ElectronicItems>(
-              builder: (context, value, child) {
-                return GridView.builder(
-                  padding: const EdgeInsets.all(20),
-                  //physics: const NeverScrollableScrollPhysics(),
-                  itemCount: value.elecItems.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1 / 1.2,
-                  ),
-                  itemBuilder: (context, index) {
-                    print(value.elecItems);
-                    return GroceryItemTile(
-                      itemName: value.elecItems[index][0],
-                      itemPrice: value.elecItems[index][1] + " PKR",
-                      imagePath: value.elecItems[index][2],
-                      color: value.elecItems[index][3],
-                      onPressed: () {
-                        Provider.of<CartModel>(context, listen: false)
-                            .addItemToCart(value.elecItems[index]);
-                      },
-                    );
-                  },
-                );
-              },
+            // recent orders -> show last 3
+            Expanded(
+              child: Consumer<ElectronicItems>(
+                builder: (context, value, child) {
+                  return GridView.builder(
+                    padding: const EdgeInsets.all(20),
+                    //physics: const NeverScrollableScrollPhysics(),
+                    itemCount: value.elecItems.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1 / 1.2,
+                    ),
+                    itemBuilder: (context, index) {
+                      print(value.elecItems);
+                      return GroceryItemTile(
+                        itemName: value.elecItems[index][0],
+                        itemPrice: value.elecItems[index][1] + " PKR",
+                        imagePath: value.elecItems[index][2],
+                        color: value.elecItems[index][3],
+                        onPressed: () {
+                          Provider.of<CartModel>(context, listen: false)
+                              .addItemToCart(value.elecItems[index]);
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
