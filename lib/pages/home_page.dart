@@ -1,4 +1,5 @@
 //'import 'dart:ffi';
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ import 'package:groceryapp/pages/fash.dart';
 import 'package:groceryapp/pages/grocer.dart';
 import 'package:groceryapp/pages/newarr.dart';
 import 'package:http/http.dart' as http;
+import 'package:animated_background/animated_background.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,7 +27,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -105,93 +107,100 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 24),
+      body: AnimatedBackground(
+        vsync: this,
+        behaviour: BubblesBehaviour(
+            options:
+            BubbleOptions(bubbleCount: 10, growthRate: 5, popRate: 150)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 24),
 
-          // categories -> horizontal listview
-          Padding(
-            padding: const EdgeInsets.only(left: 110),
-            child: Text(
-              "Categories:",
-              style: GoogleFonts.openSans(
-                //fontWeight: FontWeight.bold,
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
+            // categories -> horizontal listview
+            Padding(
+              padding: const EdgeInsets.only(left: 110),
+              child: Text(
+                "Categories:",
+                style: GoogleFonts.openSans(
+                  //fontWeight: FontWeight.bold,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
 
-          // recent orders -> show last 3
-          Expanded(
-            child: Consumer<HomeModel>(
-              builder: (context, value, child) {
-                return GridView.builder(
-                  padding: const EdgeInsets.all(20),
-                  //physics: const NeverScrollableScrollPhysics(),
-                  itemCount: value.shopItems.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1 / 1.2,
-                  ),
-                  itemBuilder: (context, index) {
-                    return GroceryItemTile(
-                      itemName: value.shopItems[index][0],
-                      itemPrice: value.shopItems[index][1],
-                      imagePath: value.shopItems[index][2],
-                      color: value.shopItems[index][3],
-                      onPressed: () {
-                        if (index == 0) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return ElecPage();
-                              },
-                            ),
-                          );
-                        }
-                        if (index == 1) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return FashPage();
-                              },
-                            ),
-                          );
-                        }
-                        if (index == 2) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return GroPage();
-                              },
-                            ),
-                          );
-                        }
-                        if (index == 3) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return NuPage();
-                              },
-                            ),
-                          );
-                        }
-                      },
-                      // Provider.of<HomeModel>(context, listen: false)
-                      //     .addItemToCart(index),
-                    );
-                  },
-                );
-              },
+            // recent orders -> show last 3
+            Expanded(
+              child: Consumer<HomeModel>(
+                builder: (context, value, child) {
+                  return GridView.builder(
+                    padding: const EdgeInsets.all(20),
+                    //physics: const NeverScrollableScrollPhysics(),
+                    itemCount: value.shopItems.length,
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1 / 1.2,
+                    ),
+                    itemBuilder: (context, index) {
+                      return GroceryItemTile(
+                        itemName: value.shopItems[index][0],
+                        itemPrice: value.shopItems[index][1],
+                        imagePath: value.shopItems[index][2],
+                        color: value.shopItems[index][3],
+                        onPressed: () {
+                          if (index == 0) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ElecPage();
+                                },
+                              ),
+                            );
+                          }
+                          if (index == 1) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return FashPage();
+                                },
+                              ),
+                            );
+                          }
+                          if (index == 2) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return GroPage();
+                                },
+                              ),
+                            );
+                          }
+                          if (index == 3) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return NuPage();
+                                },
+                              ),
+                            );
+                          }
+                        },
+                        // Provider.of<HomeModel>(context, listen: false)
+                        //     .addItemToCart(index),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

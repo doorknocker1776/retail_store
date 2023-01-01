@@ -53,8 +53,7 @@ class _PaymentPageState extends State<PaymentPage>
               children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(110, 0, 110, 0),
-                  child: Lottie.network(
-                      "https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
+                  child: Lottie.asset("lib/images/payment.json"),
                 ),
                 // logo
                 Text(
@@ -113,8 +112,8 @@ class _PaymentPageState extends State<PaymentPage>
                             Future<http.Response> response1;
                             List A = [];
                             for (int i = 0;
-                                i < cart.CartModel().cartItems.length;
-                                i++) {
+                            i < cart.CartModel().cartItems.length;
+                            i++) {
                               A.add(cart.CartModel().cartItems[i][0]);
                             }
                             var x = json.encode(A);
@@ -123,10 +122,10 @@ class _PaymentPageState extends State<PaymentPage>
                             cart.CartModel().clearCart();
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
-                              builder: (context) {
-                                return CartPage();
-                              },
-                            ));
+                                  builder: (context) {
+                                    return CartPage();
+                                  },
+                                ));
                           } else {
                             child:
                             showErrorMessage("Invalid Entry(s).");

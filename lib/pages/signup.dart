@@ -48,8 +48,12 @@ class _RegisterPageState extends State<RegisterPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent,
-      body: SafeArea(
+      backgroundColor: Colors.orange,
+      body: AnimatedBackground(
+        vsync: this,
+        behaviour: (BubblesBehaviour(
+          options: BubbleOptions(bubbleCount: 15, growthRate: 25, popRate: 150),
+        )),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -57,8 +61,7 @@ class _RegisterPageState extends State<RegisterPage>
               children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(110, 0, 110, 0),
-                  child: Lottie.network(
-                      "https://assets5.lottiefiles.com/packages/lf20_jcikwtux.json"),
+                  child: Lottie.asset("lib/images/login.json"),
                 ),
                 // logo
                 // let's create an account for you
@@ -123,7 +126,8 @@ class _RegisterPageState extends State<RegisterPage>
                       ];
                       if (username.length < 5) {
                         child:
-                        showErrorMessage("Username Must be longer than 5");
+                        showErrorMessage(
+                            "Username Must be longer than 5 Characters");
                       } else if ((RegExp(r'^[0-9]+$').hasMatch(username))) {
                         child:
                         showErrorMessage("Username cannot be all digits");
@@ -151,10 +155,10 @@ class _RegisterPageState extends State<RegisterPage>
                           if (data['status'] == 'success') {
                             return Navigator.pushReplacement(context,
                                 MaterialPageRoute(
-                              builder: (context) {
-                                return LoginPage();
-                              },
-                            ));
+                                  builder: (context) {
+                                    return LoginPage();
+                                  },
+                                ));
                           } else {
                             child:
                             showErrorMessage(

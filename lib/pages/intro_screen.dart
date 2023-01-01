@@ -34,13 +34,12 @@ class _IntroScreenState extends State<IntroScreen>
                 top: 30,
                 bottom: 40,
               ),
-              child: Lottie.network(
-                  "https://assets7.lottiefiles.com/packages/lf20_57TxAX.json"),
+              child: Lottie.asset("lib/images/shopping.json"),
             ),
 
             Padding(
               padding:
-                  const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 20),
+              const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 20),
               child: Text(
                 'Welcome to E-Mart!',
                 textAlign: TextAlign.center,
@@ -73,7 +72,7 @@ class _IntroScreenState extends State<IntroScreen>
               ),
               child: Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 70),
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 70),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: Colors.white,
