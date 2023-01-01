@@ -11,6 +11,7 @@ import 'login_page.dart' as login;
 import 'signup.dart';
 import 'account_page.dart';
 import 'package:animated_background/animated_background.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});

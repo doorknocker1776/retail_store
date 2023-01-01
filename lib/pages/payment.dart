@@ -10,6 +10,8 @@ import 'package:lottie/lottie.dart';
 import 'package:groceryapp/model/cart_model.dart' as cart;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -25,20 +27,123 @@ class _PaymentPageState extends State<PaymentPage>
   final confirmPasswordController = TextEditingController();
   // error message to user
   void showErrorMessage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.deepPurple,
-          title: Center(
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.red),
-            ),
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: Duration(milliseconds: 1000),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      //duration=_snack,
+      content: Stack(children: [
+        Container(
+          padding: EdgeInsets.all(16),
+          height: 90,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
-        );
-      },
-    );
+          child: Row(children: [
+            SizedBox(
+                width: 330,
+                child: Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(42, 0, 0, 0),
+                        child: Text(
+                          "Oh snap!",
+                          style: GoogleFonts.openSans(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(42, 0, 0, 0),
+                        child: Text(message,
+                            style: GoogleFonts.openSans(
+                                fontSize: 14, color: Colors.white),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ],
+                  ),
+                )),
+          ]),
+        ),
+        Positioned(
+            bottom: 0,
+            child: ClipRRect(
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(20)),
+                child: SvgPicture.asset(
+                  "lib/images/bubbles.svg",
+                  height: 48,
+                  width: 40,
+                )))
+      ]),
+    ));
+  }
+
+  void showSuccessMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: Duration(milliseconds: 2000),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      //duration=_snack,
+      content: Stack(children: [
+        Container(
+          padding: EdgeInsets.all(16),
+          height: 90,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          child: Row(children: [
+            SizedBox(
+                width: 330,
+                child: Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(42, 0, 0, 0),
+                        child: Text(
+                          "Payment Sucessful!",
+                          style: GoogleFonts.openSans(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(42, 0, 0, 0),
+                        child: Text(message,
+                            style: GoogleFonts.openSans(
+                                fontSize: 14, color: Colors.white),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ],
+                  ),
+                )),
+          ]),
+        ),
+        Positioned(
+            bottom: 0,
+            child: ClipRRect(
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(20)),
+                child: SvgPicture.asset(
+                  "lib/images/bubbles.svg",
+                  height: 48,
+                  width: 40,
+                )))
+      ]),
+    ));
   }
 
   @override
@@ -107,13 +212,13 @@ class _PaymentPageState extends State<PaymentPage>
                           final data = json.decode(res.body);
                           if (data['status'] == 'success') {
                             child:
-                            showErrorMessage(
+                            showSuccessMessage(
                                 "Payment Confirmed and Order Placed.");
                             Future<http.Response> response1;
                             List A = [];
                             for (int i = 0;
-                            i < cart.CartModel().cartItems.length;
-                            i++) {
+                                i < cart.CartModel().cartItems.length;
+                                i++) {
                               A.add(cart.CartModel().cartItems[i][0]);
                             }
                             var x = json.encode(A);
@@ -122,10 +227,10 @@ class _PaymentPageState extends State<PaymentPage>
                             cart.CartModel().clearCart();
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
-                                  builder: (context) {
-                                    return CartPage();
-                                  },
-                                ));
+                              builder: (context) {
+                                return CartPage();
+                              },
+                            ));
                           } else {
                             child:
                             showErrorMessage("Invalid Entry(s).");
