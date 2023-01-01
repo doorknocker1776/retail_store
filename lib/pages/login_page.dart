@@ -225,7 +225,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     children: [
                       Text(
                         'Not a member?',
-                        style: TextStyle(color: Colors.grey[700], fontSize: 15),
+                        style: GoogleFonts.openSans(
+                            color: Colors.grey[700], fontSize: 15),
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
@@ -239,7 +240,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ),
                         child: Text(
                           'Register now',
-                          style: TextStyle(color: Colors.blue[800]),
+                          style: GoogleFonts.openSans(color: Colors.blue[800]),
                         ),
                       )
                     ],

@@ -182,8 +182,7 @@ class _RegisterPageState extends State<RegisterPage>
                             "Password cannot be the same as the username");
                       } else if (password != cpassword) {
                         child:
-                        showErrorMessage(
-                            "Error: Password and confirm password do not match");
+                        showErrorMessage("Error: Passwords do not match");
                       } else if (!RegExp(r'^[0-9]+$').hasMatch(bnk)) {
                         child:
                         showErrorMessage(
@@ -254,7 +253,8 @@ class _RegisterPageState extends State<RegisterPage>
                       ),
                       child: Text(
                         'Log in now',
-                        style: GoogleFonts.openSans(color: Color.fromARGB(255, 0, 119, 255)),
+                        style: GoogleFonts.openSans(
+                            color: Color.fromARGB(255, 0, 119, 255)),
                       ),
                     )
                   ],
