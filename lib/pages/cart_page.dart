@@ -29,7 +29,7 @@ class _CartPage extends State<CartPage> {
           title: Center(
             child: Text(
               message,
-              style: const TextStyle(color: Colors.red),
+              style: GoogleFonts.openSans(color: Colors.red),
             ),
           ),
         );
@@ -147,11 +147,11 @@ class _CartPage extends State<CartPage> {
                             ),
                             title: Text(
                               value.cartItems[index][0],
-                              style: const TextStyle(fontSize: 18),
+                              style: GoogleFonts.openSans(fontSize: 18),
                             ),
                             subtitle: Text(
                               '\PKR' + value.cartItems[index][1],
-                              style: const TextStyle(fontSize: 12),
+                              style: GoogleFonts.openSans(fontSize: 12),
                             ),
                             trailing: IconButton(
                                 icon: const Icon(Icons.cancel),
@@ -187,7 +187,7 @@ class _CartPage extends State<CartPage> {
                           children: [
                             Text(
                               "SubTotal: ${value.calculateTotal()}",
-                              style: TextStyle(
+                              style: GoogleFonts.openSans(
                                 color: Colors.white,
                                 fontSize: 14,
                               ),
@@ -195,7 +195,7 @@ class _CartPage extends State<CartPage> {
                             const SizedBox(height: 8),
                             Text(
                               'Discount: ${value.discount()}',
-                              style: TextStyle(
+                              style: GoogleFonts.openSans(
                                 color: Colors.white,
                                 fontSize: 14,
                               ),
@@ -205,7 +205,7 @@ class _CartPage extends State<CartPage> {
                             // total price
                             Text(
                               'Total PKR ${value.calculateTotal() - value.discount()}',
-                              style: const TextStyle(
+                              style: GoogleFonts.openSans(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -230,8 +230,8 @@ class _CartPage extends State<CartPage> {
                                 child: ElevatedButton(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          Colors.white)),
+                                          MaterialStateProperty.all(
+                                              Colors.white)),
                                   onPressed: () {
                                     if (value.calculateTotal() == 0) {
                                       showErrorMessage(
@@ -240,23 +240,23 @@ class _CartPage extends State<CartPage> {
                                       if (login.isloggedin == false) {
                                         Navigator.pushReplacement(context,
                                             MaterialPageRoute(
-                                              builder: (context) {
-                                                return RegisterPage(onTap: null);
-                                              },
-                                            ));
+                                          builder: (context) {
+                                            return RegisterPage(onTap: null);
+                                          },
+                                        ));
                                       } else if (login.isloggedin == true) {
                                         Navigator.pushReplacement(context,
                                             MaterialPageRoute(
-                                              builder: (context) {
-                                                return payment.PaymentPage();
-                                              },
-                                            ));
+                                          builder: (context) {
+                                            return payment.PaymentPage();
+                                          },
+                                        ));
                                       }
                                     }
                                   },
                                   child: Text(
                                     "Pay Now",
-                                    style: TextStyle(
+                                    style: GoogleFonts.openSans(
                                       fontSize: 18,
                                       color: Colors.orange,
                                       fontWeight: FontWeight.bold,

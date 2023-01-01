@@ -63,7 +63,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
         title: Text(
           'Islamabad, Pakistan',
-          style: TextStyle(
+          style: GoogleFonts.openSans(
             fontSize: 20,
             color: Colors.black,
           ),

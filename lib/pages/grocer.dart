@@ -33,7 +33,7 @@ class _GPageState extends State<GroPage> {
         ),
         title: Text(
           'Islamabad, Pakistan',
-          style: TextStyle(
+          style: GoogleFonts.openSans(
             fontSize: 20,
             color: Colors.black,
           ),
@@ -105,7 +105,7 @@ class _GPageState extends State<GroPage> {
             padding: const EdgeInsets.only(left: 80),
             child: Text(
               "Items:",
-              style: GoogleFonts.notoSerif(
+              style: GoogleFonts.openSans(
                 //fontWeight: FontWeight.bold,
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
