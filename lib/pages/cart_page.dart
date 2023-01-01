@@ -20,6 +20,23 @@ class CartPage extends StatefulWidget {
 
 class _CartPage extends State<CartPage> {
   int index = 2;
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Center(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,11 +154,11 @@ class _CartPage extends State<CartPage> {
                               style: const TextStyle(fontSize: 12),
                             ),
                             trailing: IconButton(
-                              icon: const Icon(Icons.cancel),
-                              onPressed: () =>
+                                icon: const Icon(Icons.cancel),
+                                onPressed: () {
                                   Provider.of<CartModel>(context, listen: false)
-                                      .removeItemFromCart(index),
-                            ),
+                                      .removeItemFromCart(index);
+                                }),
                           ),
                         ),
                       );
@@ -168,7 +185,8 @@ class _CartPage extends State<CartPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("SubTotal: ${value.calculateTotal()}",
+                            Text(
+                              "SubTotal: ${value.calculateTotal()}",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -177,7 +195,8 @@ class _CartPage extends State<CartPage> {
                             const SizedBox(height: 8),
                             Text(
                               'Discount: ${value.discount()}',
-                              style: TextStyle(color: Colors.white,
+                              style: TextStyle(
+                                color: Colors.white,
                                 fontSize: 14,
                               ),
                             ),
@@ -199,7 +218,8 @@ class _CartPage extends State<CartPage> {
                         SizedBox(
                           width: 135,
                           height: 60,
-                          child: Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
                             child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.white),
@@ -209,23 +229,29 @@ class _CartPage extends State<CartPage> {
                                 padding: const EdgeInsets.all(12),
                                 child: ElevatedButton(
                                   style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(Colors.white)
-                                  ),
+                                      backgroundColor:
+                                      MaterialStateProperty.all(
+                                          Colors.white)),
                                   onPressed: () {
-                                    if (login.isloggedin == false) {
-                                      Navigator.pushReplacement(context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return RegisterPage(onTap: null);
-                                            },
-                                          ));
-                                    } else if (login.isloggedin == true) {
-                                      Navigator.pushReplacement(context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return payment.PaymentPage();
-                                            },
-                                          ));
+                                    if (value.calculateTotal() == 0) {
+                                      showErrorMessage(
+                                          "Cannot place order with an empty cart!");
+                                    } else {
+                                      if (login.isloggedin == false) {
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return RegisterPage(onTap: null);
+                                              },
+                                            ));
+                                      } else if (login.isloggedin == true) {
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return payment.PaymentPage();
+                                              },
+                                            ));
+                                      }
                                     }
                                   },
                                   child: Text(
@@ -236,8 +262,7 @@ class _CartPage extends State<CartPage> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                )
-                            ),
+                                )),
                           ),
                         ),
                       ],

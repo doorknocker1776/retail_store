@@ -19,6 +19,8 @@ import 'package:groceryapp/pages/grocer.dart';
 import 'package:groceryapp/pages/newarr.dart';
 import 'package:http/http.dart' as http;
 import 'package:animated_background/animated_background.dart';
+import 'items_page.dart' as ip;
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -155,7 +157,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return ElecPage();
+                                  ip.type = "elec";
+                                  return ip.itemspage();
                                 },
                               ),
                             );
@@ -165,7 +168,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return FashPage();
+                                  ip.type = "fash";
+                                  return ip.itemspage();
                                 },
                               ),
                             );
@@ -175,7 +179,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return GroPage();
+                                  ip.type = "grocer";
+                                  return ip.itemspage();
                                 },
                               ),
                             );
@@ -185,7 +190,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return NuPage();
+                                  ip.type = "nuu";
+                                  return ip.itemspage();
                                 },
                               ),
                             );
