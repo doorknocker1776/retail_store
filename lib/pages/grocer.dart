@@ -86,7 +86,7 @@ class _GPageState extends State<GroPage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.search,
+            Icons.wysiwyg,
             color: Colors.white,
           ),
           Icon(

@@ -28,7 +28,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 158, 22),
         leading: Padding(
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         color: Color.fromARGB(255, 255, 158, 22),
         animationDuration: Duration(milliseconds: 450),
         onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.search,
+            Icons.wysiwyg,
             color: Colors.white,
           ),
           Icon(

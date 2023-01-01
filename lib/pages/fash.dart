@@ -86,7 +86,7 @@ class _FashPageState extends State<FashPage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.search,
+            Icons.wysiwyg,
             color: Colors.white,
           ),
           Icon(

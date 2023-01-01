@@ -90,7 +90,7 @@ class _NuPageState extends State<NuPage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.search,
+            Icons.wysiwyg,
             color: Colors.white,
           ),
           Icon(

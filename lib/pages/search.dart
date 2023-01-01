@@ -9,6 +9,7 @@ import 'intro_screen.dart';
 import "home_page.dart";
 import "cart_page.dart";
 import 'package:groceryapp/model/cart_model.dart';
+import 'account_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -25,21 +26,46 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
-        title: Text(
-          "Search",
-          style: GoogleFonts.openSans(
-            fontSize: 30,
+        backgroundColor: Color.fromARGB(255, 255, 158, 22),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 0.0),
+          child: Icon(
+            Icons.location_on,
+            size: 30,
             color: Colors.black,
-            fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.orange,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.grey[800],
+        title: Text(
+          'Islamabad, Pakistan',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+          ),
         ),
+        titleSpacing: -12,
+        actions: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return AccountPage();
+                },
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: Icon(
+                Icons.person,
+                size: 32.0,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
@@ -68,7 +94,7 @@ class _SearchPageState extends State<SearchPage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.search,
+            Icons.wysiwyg,
             color: Colors.white,
           ),
           Icon(

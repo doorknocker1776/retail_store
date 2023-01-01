@@ -86,7 +86,7 @@ class _ElecPageState extends State<ElecPage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.search,
+            Icons.wysiwyg,
             color: Colors.white,
           ),
           Icon(
