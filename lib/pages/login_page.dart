@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:groceryapp/components/my_button.dart';
@@ -13,6 +15,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:groceryapp/pages/account_page.dart' as ac;
 import "signup.dart" as signup;
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 bool isloggedin = false;
 
@@ -27,20 +30,63 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   final passwordController = TextEditingController();
   void showErrorMessage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.deepPurple,
-          title: Center(
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.red),
-            ),
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      elevation: 0,
+      duration: Duration(milliseconds: 1000),
+      backgroundColor: Colors.transparent,
+      //duration=_snack,
+      content: Stack(children: [
+        Container(
+          padding: EdgeInsets.all(16),
+          height: 90,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
-        );
-      },
-    );
+          child: Row(children: [
+            SizedBox(
+                width: 300,
+                child: Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(42, 0, 0, 0),
+                        child: Text(
+                          "Oh snap!",
+                          style: GoogleFonts.openSans(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(42, 0, 0, 0),
+                        child: Text(message,
+                            style: GoogleFonts.openSans(
+                                fontSize: 16, color: Colors.white),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ],
+                  ),
+                )),
+          ]),
+        ),
+        Positioned(
+            bottom: 0,
+            child: ClipRRect(
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(20)),
+                child: SvgPicture.asset(
+                  "lib/images/bubbles.svg",
+                  height: 48,
+                  width: 40,
+                )))
+      ]),
+    ));
   }
 
   // sign user in method

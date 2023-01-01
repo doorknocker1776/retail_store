@@ -6,7 +6,7 @@ app = Flask(__name__)
 cnx = mysql.connector.connect(
     host = 'localhost',
     user='root',
-    password='seecs@123',
+    password='root123',
     database="online_store",
     autocommit = True
 )

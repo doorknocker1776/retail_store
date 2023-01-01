@@ -9,6 +9,8 @@ import 'package:lottie/lottie.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -29,20 +31,63 @@ class _RegisterPageState extends State<RegisterPage>
 
   // error message to user
   void showErrorMessage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.deepPurple,
-          title: Center(
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.red),
-            ),
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: Duration(milliseconds: 1000),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      //duration=_snack,
+      content: Stack(children: [
+        Container(
+          padding: EdgeInsets.all(16),
+          height: 90,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
-        );
-      },
-    );
+          child: Row(children: [
+            SizedBox(
+                width: 330,
+                child: Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Text(
+                          "Oh snap!",
+                          style: GoogleFonts.openSans(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Text(message,
+                            style: GoogleFonts.openSans(
+                                fontSize: 14, color: Colors.white),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ],
+                  ),
+                )),
+          ]),
+        ),
+        Positioned(
+            bottom: 0,
+            child: ClipRRect(
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(20)),
+                child: SvgPicture.asset(
+                  "lib/images/bubbles.svg",
+                  height: 48,
+                  width: 40,
+                )))
+      ]),
+    ));
   }
 
   @override
@@ -134,7 +179,7 @@ class _RegisterPageState extends State<RegisterPage>
                       } else if (password == username) {
                         child:
                         showErrorMessage(
-                            "Error: Password cannot be the same as the username");
+                            "Password cannot be the same as the username");
                       } else if (password != cpassword) {
                         child:
                         showErrorMessage(
@@ -155,14 +200,14 @@ class _RegisterPageState extends State<RegisterPage>
                           if (data['status'] == 'success') {
                             return Navigator.pushReplacement(context,
                                 MaterialPageRoute(
-                                  builder: (context) {
-                                    return LoginPage();
-                                  },
-                                ));
+                              builder: (context) {
+                                return LoginPage();
+                              },
+                            ));
                           } else {
                             child:
                             showErrorMessage(
-                                "Error: Invalid Entry(s). Username could be taken, try again.");
+                                "Invalid Entry(s) or username taken.");
                           }
                         });
                       }
@@ -195,7 +240,7 @@ class _RegisterPageState extends State<RegisterPage>
                   children: [
                     Text(
                       'Already have an account?',
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: GoogleFonts.openSans(color: Colors.grey[700]),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
@@ -209,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage>
                       ),
                       child: Text(
                         'Log in now',
-                        style: TextStyle(color: Colors.blue),
+                        style: GoogleFonts.openSans(color: Color.fromARGB(255, 0, 119, 255)),
                       ),
                     )
                   ],
