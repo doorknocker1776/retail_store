@@ -172,7 +172,7 @@ class _CartPage extends State<CartPage> {
                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                 child: SizedBox(
                   height: 120,
-                  width: 700,
+                  width: 800,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -192,7 +192,7 @@ class _CartPage extends State<CartPage> {
                                 fontSize: 14,
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 0),
                             Text(
                               'Discount: ${value.discount()}',
                               style: GoogleFonts.openSans(
@@ -201,7 +201,7 @@ class _CartPage extends State<CartPage> {
                               ),
                             ),
 
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 5),
                             // total price
                             Text(
                               'Total PKR ${value.calculateTotal() - value.discount()}',
@@ -216,7 +216,7 @@ class _CartPage extends State<CartPage> {
 
                         // pay now
                         SizedBox(
-                          width: 135,
+                          width: 145,
                           height: 60,
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),

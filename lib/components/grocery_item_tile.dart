@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GroceryItemTile extends StatelessWidget {
   final String itemName;
@@ -32,7 +33,7 @@ class GroceryItemTile extends StatelessWidget {
           children: [
             // item image
             Padding(
-              padding: const EdgeInsets.only(top:0),
+              padding: const EdgeInsets.only(top: 0),
               child: Image.asset(
                 imagePath,
                 height: 100,
@@ -42,7 +43,7 @@ class GroceryItemTile extends StatelessWidget {
             // item name
             Text(
               itemName,
-              style: TextStyle(
+              style: GoogleFonts.openSans(
                 fontSize: 18,
               ),
             ),
@@ -52,7 +53,7 @@ class GroceryItemTile extends StatelessWidget {
               color: color,
               child: Text(
                 '\ ' + itemPrice,
-                style: TextStyle(
+                style: GoogleFonts.openSans(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),

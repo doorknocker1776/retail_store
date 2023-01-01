@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
@@ -16,10 +17,10 @@ class MyButton extends StatelessWidget {
           color: Colors.black,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
             "Sign In",
-            style: TextStyle(
+            style: GoogleFonts.openSans(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 16,

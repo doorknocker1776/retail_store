@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 class MyTextField extends StatelessWidget {
   final controller;
   final String hintText;
@@ -10,6 +10,7 @@ class MyTextField extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    
   });
 
   @override
@@ -29,7 +30,7 @@ class MyTextField extends StatelessWidget {
             fillColor: Colors.grey.shade200,
             filled: true,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.black)),
+            hintStyle: GoogleFonts.openSans(color: Colors.black)),
       ),
     );
   }
