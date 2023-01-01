@@ -4,8 +4,10 @@ import 'package:groceryapp/model/home_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
+import 'dart:async';
 
-List populate() {
+Future<List> populate() async {
   List data1 = [];
   List X = [];
   Future<http.Response> response4 =
@@ -81,7 +83,7 @@ List populate3() {
   return X;
 }
 
-List _elecItems = populate();
+Future<List> _elecItems = populate();
 List _groceryItems = populate1();
 List _fashItems = populate2();
 List _newItems = populate3();

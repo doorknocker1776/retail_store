@@ -10,6 +10,7 @@ import 'package:groceryapp/pages/home_page.dart';
 import 'package:groceryapp/model/items_model.dart';
 import 'package:groceryapp/model/cart_model.dart';
 import 'dart:async';
+import 'dart:io';
 
 class ElecPage extends StatefulWidget {
   const ElecPage({super.key});
@@ -117,6 +118,11 @@ class _ElecPageState extends State<ElecPage> {
           Expanded(
             child: Consumer<ElectronicItems>(
               builder: (context, value, child) {
+                List blegh = value.elecItems;
+                print(blegh);
+                blegh = value.elecItems;
+                print(blegh);
+
                 return GridView.builder(
                   padding: const EdgeInsets.all(20),
                   //physics: const NeverScrollableScrollPhysics(),
