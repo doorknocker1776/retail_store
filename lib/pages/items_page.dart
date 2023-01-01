@@ -57,7 +57,7 @@ class itemspageState extends State<itemspage> {
 
         return items;
       }
-      else if (type == "fash"){
+      else if (type == "grocer"){
         var response;
         response = await http.get((Uri.parse(
             "http://10.0.2.2:5000/populate1")));
@@ -74,7 +74,7 @@ class itemspageState extends State<itemspage> {
         return items;
 
       }
-      else if (type == "grocer"){
+      else if (type == "fash"){
         var response;
         response = await http.get((Uri.parse(
             "http://10.0.2.2:5000/populate2")));
