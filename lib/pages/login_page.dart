@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     onTap: signUserIn,
                   ),
 
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 70),
 
                   // or continue with
                   Padding(
@@ -204,13 +204,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       children: [
                         Expanded(
                           child: Divider(
-                            thickness: 2,
+                            thickness: 1,
                             color: Colors.black,
                           ),
                         ),
                         Expanded(
                           child: Divider(
-                            thickness: 2,
+                            thickness: 1,
                             color: Colors.black,
                           ),
                         ),
@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     ),
                   ),
 
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 10),
                   // not a member? register now
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
