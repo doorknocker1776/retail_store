@@ -16,7 +16,7 @@ import 'dart:convert';
 import 'intro_screen.dart';
 
 String type = "";
-
+List X = [];
 class itemspage extends StatefulWidget {
   final GlobalKey<CurvedNavigationBarState> _navigationBarKey =
   GlobalKey<CurvedNavigationBarState>();
@@ -25,6 +25,15 @@ class itemspage extends StatefulWidget {
   State<StatefulWidget> createState() {
     return new itemspageState();
   }
+}
+
+void listmaker(var t, int i){
+  X.add([
+    t['status'][i][0],
+    '${t['status'][i][1]}',
+    "lib/images/${t['status'][i][0].toLowerCase()}.png",
+    Colors.grey
+  ]);
 }
 
 class itemspageState extends State<itemspage> {
@@ -39,11 +48,13 @@ class itemspageState extends State<itemspage> {
         var jsondata = json.decode(response.body);
         List<itemsinfo> items = [];
         for(int i = 0; i < jsondata['status'].length; i++){
+          listmaker(jsondata,i);
           itemsinfo item = itemsinfo("${jsondata['status'][i][0]}",
               "${jsondata['status'][i][1]}","lib/images/${jsondata['status'][i][0].toLowerCase()}.png");
           items.add(item);
         }
         print(items.length);
+
         return items;
       }
       else if (type == "fash"){
@@ -53,6 +64,8 @@ class itemspageState extends State<itemspage> {
         var jsondata = json.decode(response.body);
         List<itemsinfo> items = [];
         for(int i = 0; i < jsondata['status'].length; i++){
+          listmaker(jsondata,i);
+
           itemsinfo item = itemsinfo("${jsondata['status'][i][0]}",
               "${jsondata['status'][i][1]}","lib/images/${jsondata['status'][i][0].toLowerCase()}.png");
           items.add(item);
@@ -68,6 +81,8 @@ class itemspageState extends State<itemspage> {
         var jsondata = json.decode(response.body);
         List<itemsinfo> items = [];
         for(int i = 0; i < jsondata['status'].length; i++){
+          listmaker(jsondata,i);
+
           itemsinfo item = itemsinfo("${jsondata['status'][i][0]}",
               "${jsondata['status'][i][1]}","lib/images/${jsondata['status'][i][0].toLowerCase()}.png");
           items.add(item);
@@ -83,13 +98,14 @@ class itemspageState extends State<itemspage> {
         var jsondata = json.decode(response.body);
         List<itemsinfo> items = [];
         for(int i = 0; i < jsondata['status'].length; i++){
+          listmaker(jsondata,i);
+
           itemsinfo item = itemsinfo("${jsondata['status'][i][0]}",
               "${jsondata['status'][i][1]}","lib/images/${jsondata['status'][i][0].toLowerCase()}.png");
           items.add(item);
         }
         print(items.length);
         return items;
-
       }
       return [];
     }
@@ -205,7 +221,7 @@ class itemspageState extends State<itemspage> {
                           color: snapshot.data[index].color,
                           onPressed: () {
                             Provider.of<CartModel>(context, listen: false)
-                                .addItemToCart(snapshot.data[index]);
+                                .addItemToCart(X[index]);
                           },
                         );
                       },
