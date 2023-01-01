@@ -28,6 +28,8 @@ class _SearchPageState extends State<SearchPage> {
 
   Future<List> _getOrders() async {
     String un = ac.username;
+    if(un == "-"){return [];}
+    else{
     var response;
     response = await http.get((Uri.parse(
         "http://10.0.2.2:5000/popuorders?UserID=${un}")));
@@ -39,7 +41,7 @@ class _SearchPageState extends State<SearchPage> {
       orders.add(order);
     }
     print(orders.length);
-    return orders;
+    return orders;}
   }
 
   int index = 1;
@@ -129,7 +131,14 @@ class _SearchPageState extends State<SearchPage> {
         child: FutureBuilder(
           future: _getOrders(),
           builder: (BuildContext context, AsyncSnapshot snapshot){
-            if(snapshot.data == null){
+            if(ac.username == "-"){
+              return Container(
+                  child: Center(
+                      child: Text("Please create an account to view order history")
+                  )
+              );
+            }
+            else if(snapshot.data == null){
               return Container(
                 child: Center(
                   child: Text("Loading")
