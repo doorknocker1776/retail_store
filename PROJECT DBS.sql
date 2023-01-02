@@ -14,7 +14,7 @@ CREATE TABLE Item
   `Name` VARCHAR(45) NOT NULL,
   Price INT NOT NULL,
   `Desc` VARCHAR(45) NOT NULL,
-  Availability BOOLEAN DEFAULT true
+  Availability BOOLEAN DEFAULT 1
 );
 
 CREATE TABLE Orders
@@ -43,10 +43,8 @@ CREATE TABLE Bill
   Subtotal INT NOT NULL,
   Discount INT NOT NULL,
   Order_ID INT,
-  Customer_ID INT,
   PRIMARY KEY (Bill_ID),
-  FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID),
-  FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID)
+  FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID)
 );
 
 CREATE TABLE `Account`

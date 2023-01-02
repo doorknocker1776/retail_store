@@ -133,7 +133,6 @@ class _ElecPageState extends State<ElecPage> with TickerProviderStateMixin {
                       childAspectRatio: 1 / 1.2,
                     ),
                     itemBuilder: (context, index) {
-                      print(value.elecItems);
                       return GroceryItemTile(
                         itemName: value.elecItems[index][0],
                         itemPrice: value.elecItems[index][1] + " PKR",

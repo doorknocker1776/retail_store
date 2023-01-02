@@ -31,21 +31,21 @@ class CartModel extends ChangeNotifier {
   double calculateTotal() {
     double totalPrice = 0;
     for (int i = 0; i < cartItems.length; i++) {
-      print(cartItems);
       totalPrice += double.parse(cartItems[i][1]);
     }
 
     return totalPrice;
   }
-  void nukecart(){
+
+  void nukecart() {
     _cartItems = [];
   }
+
   double discount() {
     double totalPrice = 0;
     double discountt = 0;
     double inDouble = 0;
     for (int i = 0; i < cartItems.length; i++) {
-      print(cartItems);
       totalPrice += double.parse(cartItems[i][1]);
       if (totalPrice > 1000) {
         discountt = totalPrice * 0.05;

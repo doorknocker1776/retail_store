@@ -216,6 +216,8 @@ class _PaymentPageState extends State<PaymentPage>
                                 "Payment Confirmed and Order Placed.");
                             Future<http.Response> response1;
                             List A = [];
+                            var subtotal = cart.CartModel().calculateTotal();
+                            var discount = cart.CartModel().discount();
                             for (int i = 0;
                                 i < cart.CartModel().cartItems.length;
                                 i++) {
@@ -223,7 +225,7 @@ class _PaymentPageState extends State<PaymentPage>
                             }
                             var x = json.encode(A);
                             response1 = http.get((Uri.parse(
-                                "http://10.0.2.2:5000/Order?UserID=${usernameController.text}&Items=${x}")));
+                                "http://10.0.2.2:5000/Order?UserID=${usernameController.text}&Items=${x}&Total=${subtotal}&Discount=${discount}")));
                             cart.CartModel().clearCart();
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(

@@ -98,6 +98,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       final data = json.decode(res.body);
       if (data['status'] == 'success') {
         ac.username = usernameController.text;
+        ac.initials = usernameController.text[0];
+        ac.s = "Log Out";
         isloggedin = true;
         return Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) {

@@ -16,6 +16,18 @@ import 'login_page.dart' as login;
 import 'signup.dart';
 import 'package:animated_background/animated_background.dart';
 
+String _set() {
+  s = "";
+  if (isloggedin == true) {
+    s = "Log Out";
+  } else if (isloggedin == false) {
+    s = "Log In";
+  }
+  return s;
+}
+
+String orders = "?";
+String s = _set();
 String username = "-";
 String initials = username[0];
 
@@ -68,7 +80,7 @@ class _AccountPage extends State<AccountPage> with TickerProviderStateMixin {
                   SizedBox(height: 8),
                   // Total orders
                   Text(
-                    "Total orders: 0",
+                    "Total orders: $orders",
                     style: TextStyle(
                       fontSize: 16,
                     ),
@@ -77,16 +89,17 @@ class _AccountPage extends State<AccountPage> with TickerProviderStateMixin {
                   // Edit button
                   ElevatedButton(
                     onPressed: () {
+                      username = "-";
+                      isloggedin = false;
+                      s = _set();
+                      initials = username[0];
+                      orders = "?";
+                      Provider.of<CartModel>(context, listen: false).nukecart();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            //YO WAHAJ MAKE EVERYTHING TO GUEST DETAILS HERE HARDCODDED STYLE!!!!
-                            username = "-";
-                            initials = username[0];
-                            Provider.of<CartModel>(context, listen: false)
-                                .nukecart();
-                            return IntroScreen();
+                            return LoginPage();
                           },
                         ),
                       );
@@ -96,7 +109,7 @@ class _AccountPage extends State<AccountPage> with TickerProviderStateMixin {
                           MaterialStateProperty.all<Color>(Colors.orange),
                     ),
                     child: Text(
-                      "Log Out/Exit",
+                      s,
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -106,7 +119,7 @@ class _AccountPage extends State<AccountPage> with TickerProviderStateMixin {
                   // Recent purchases
                   Expanded(
                     child: ListView.builder(
-                      itemCount: 5,
+                      itemCount: 0,
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text("Order # $index"),

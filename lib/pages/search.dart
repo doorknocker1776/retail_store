@@ -28,20 +28,24 @@ class _SearchPageState extends State<SearchPage> {
 
   Future<List> _getOrders() async {
     String un = ac.username;
-    if(un == "-"){return [];}
-    else{
-    var response;
-    response = await http.get((Uri.parse(
-        "http://10.0.2.2:5000/popuorders?UserID=${un}")));
-    var jsondata = json.decode(response.body);
-    List<ordersinfo> orders = [];
-    for(int i = 0; i < jsondata['status'].length; i++){
-      ordersinfo order = ordersinfo("${jsondata['status'][i][0]}",
-          "${jsondata['status'][i][1]}","${jsondata['status'][i][2]}","${jsondata['status'][i][3]}");
-      orders.add(order);
+    if (un == "-") {
+      return [];
+    } else {
+      var response;
+      response = await http
+          .get((Uri.parse("http://10.0.2.2:5000/popuorders?UserID=${un}")));
+      var jsondata = json.decode(response.body);
+      List<ordersinfo> orders = [];
+      for (int i = 0; i < jsondata['status'].length; i++) {
+        ordersinfo order = ordersinfo(
+            "${jsondata['status'][i][0]}",
+            "${jsondata['status'][i][1]}",
+            "${jsondata['status'][i][2]}",
+            "${jsondata['status'][i][3]}");
+        orders.add(order);
+      }
+      return orders;
     }
-    print(orders.length);
-    return orders;}
   }
 
   int index = 1;
@@ -49,117 +53,117 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 158, 22),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 0.0),
-          child: Icon(
-            Icons.location_on,
-            size: 30,
-            color: Colors.black,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 255, 158, 22),
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 0.0),
+            child: Icon(
+              Icons.location_on,
+              size: 30,
+              color: Colors.black,
+            ),
           ),
-        ),
-        title: Text(
-          'Islamabad, Pakistan',
-          style: GoogleFonts.openSans(
-            fontSize: 20,
-            color: Colors.black,
+          title: Text(
+            'Islamabad, Pakistan',
+            style: GoogleFonts.openSans(
+              fontSize: 20,
+              color: Colors.black,
+            ),
           ),
+          titleSpacing: -12,
+          actions: [
+            GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return AccountPage();
+                  },
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 15.0),
+                child: Icon(
+                  Icons.person,
+                  size: 32.0,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
         ),
-        titleSpacing: -12,
-        actions: [
-          GestureDetector(
-            onTap: () => Navigator.push(
+        bottomNavigationBar: CurvedNavigationBar(
+          height: 50,
+          index: index,
+          backgroundColor: Colors.white,
+          color: Colors.orange,
+          animationDuration: Duration(milliseconds: 450),
+          onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return AccountPage();
+                  if (index == 0) {
+                    return HomePage();
+                  } else if (index == 1) {
+                    return SearchPage();
+                  } else {
+                    return CartPage();
+                  }
                 },
               ),
+            );
+          }),
+          items: [
+            Icon(
+              Icons.home,
+              color: Colors.white,
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 15.0),
-              child: Icon(
-                Icons.person,
-                size: 32.0,
-                color: Colors.black,
-              ),
+            Icon(
+              Icons.wysiwyg,
+              color: Colors.white,
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        height: 50,
-        index: index,
-        backgroundColor: Colors.white,
-        color: Colors.orange,
-        animationDuration: Duration(milliseconds: 450),
-        onTap: (index) => Future.delayed(Duration(milliseconds: 550), () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                if (index == 0) {
-                  return HomePage();
-                } else if (index == 1) {
-                  return IntroScreen();
-                }
-                return CartPage();
-              },
+            Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
             ),
-          );
-        }),
-        items: [
-          Icon(
-            Icons.home,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.wysiwyg,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.shopping_cart,
-            color: Colors.white,
-          ),
-        ],
-      ),
-
-      body: Container(
-        child: FutureBuilder(
-          future: _getOrders(),
-          builder: (BuildContext context, AsyncSnapshot snapshot){
-            if(ac.username == "-"){
-              return Container(
-                  child: Center(
-                      child: Text("Please create an account to view order history")
-                  )
-              );
-            }
-            else if(snapshot.data == null){
-              return Container(
-                child: Center(
-                  child: Text("Loading")
-                )
-              );
-            }
-            else{
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index){
-                  return ListTile(
-                      title: Text("Bill: "+snapshot.data[index].billid),
-                      subtitle: Text(" Total: "+snapshot.data[index].total+"PKR Subtotal: "+snapshot.data[index].subtotal+"PKR Discount: "+snapshot.data[index].discount+"PKR"),
-                  );
-                },
-              );
-            }
-          }
-        )
-      )
-    );
+          ],
+        ),
+        body: Container(
+            child: FutureBuilder(
+                future: _getOrders(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (ac.username == "-") {
+                    return Container(
+                        child: Center(
+                            child: Text(
+                                "Please create an account to view order history")));
+                  } else if (snapshot.data == null) {
+                    return Container(child: Center(child: Text("Loading")));
+                  } else {
+                    Container(child: Center(child: Text("Order History")));
+                    ac.orders = "${snapshot.data.length}";
+                    return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text("\nOrder No: " + "${index + 1}"),
+                          subtitle: Text("Items Ordered: " +
+                              snapshot.data[index].billid +
+                              "\nSubtotal: " +
+                              snapshot.data[index].subtotal +
+                              " PKR \nDiscount: " +
+                              snapshot.data[index].discount +
+                              " PKR" +
+                              "\nAmount Paid: " +
+                              snapshot.data[index].total +
+                              " PKR"),
+                        );
+                      },
+                    );
+                  }
+                })));
   }
 } //onpressed:
 
