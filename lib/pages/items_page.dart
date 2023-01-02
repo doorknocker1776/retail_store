@@ -163,7 +163,7 @@ class itemspageState extends State<itemspage> {
                   if (index == 0) {
                     return HomePage();
                   } else if (index == 1) {
-                    return IntroScreen();
+                    return SearchPage();
                   }
                   return CartPage();
                 },
