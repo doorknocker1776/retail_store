@@ -7,15 +7,15 @@ app = Flask(__name__)
 cnx = mysql.connector.connect(
     host = 'localhost',
     user='root',
-    password='sns@123',
+    password='seecs@123',
     database="online_store",
     autocommit = True
 )
 @app.route('/get_user', methods=['POST', 'GET'])
-def aquery(bDate, sub, discount, result1):
-        cursor = cnx.cursor()
-        queryn = f"Insert into online_store.bill (BillDate, Subtotal, Discount, Order_ID) VALUES ('{bDate}', {sub}, {discount}, {result1})"
-        cursor.execute(queryn)
+#def aquery(bDate, sub, discount, result1):
+#        cursor = cnx.cursor()
+#        queryn = f"Insert into online_store.bill (BillDate, Subtotal, Discount, Order_ID) VALUES ('{bDate}', {sub}, {discount}, {result1})"
+#        cursor.execute(queryn)
 
 def get_user():
     # Get the user data from the request
@@ -112,7 +112,7 @@ def Order():
             result2 = result2[0]
             query = f"Insert into online_store.orders (Order_ID, Customer_ID, ItemID, Quantity) VALUES ({result1}, {result}, {result2}, {item_dict[key][-1]});"
             cursor.execute(query)
-            aquery(bDate, sub, discount, result1)
+            #aquery(bDate, sub, discount, result1)
         return jsonify({'status': 'success'})               
     except:
         return jsonify({'status': 'failed'})

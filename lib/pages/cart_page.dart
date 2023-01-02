@@ -246,12 +246,8 @@ class _CartPage extends State<CartPage> with TickerProviderStateMixin {
                                             "Cannot place order with an empty cart!");
                                       } else {
                                         if (login.isloggedin == false) {
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(
-                                            builder: (context) {
-                                              return RegisterPage(onTap: null);
-                                            },
-                                          ));
+                                        showErrorMessage(
+                                        "Cannot place order without creating an account!");
                                         } else if (login.isloggedin == true) {
                                           Navigator.pushReplacement(context,
                                               MaterialPageRoute(
